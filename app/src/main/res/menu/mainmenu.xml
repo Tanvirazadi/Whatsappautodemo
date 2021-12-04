@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/main"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/lang"
+            android:title="Language"
+            android:icon="@drawable/ic_baseline_language_24"
+            />
+
+        <item android:id="@+id/profile"
+            android:title="Profile"
+            />
+
+        <item android:id="@+id/list"
+            android:title="Broadcast Lists"/>
+
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/status">
+
+
+        <item android:id="@+id/pend"
+            android:title="Pending"/>
+
+        <item android:id="@+id/don"
+            android:title="Done"
+            android:icon="@drawable/ic_baseline_cloud_done_24"/>
+
+        <item android:id="@+id/Fail"
+            android:title="Failed"/>
+
+        <item android:id="@+id/delete"
+            android:title="Deleted"/>
+
+
+
+
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/center">
+
+
+        <item android:id="@+id/help"
+            android:title="Help Center"/>
+
+        <item android:id="@+id/comminuty"
+            android:title="Community"/>
+
+        <item android:id="@+id/tutor"
+            android:title="Tutorial"/>
+
+
+    </group>
+
+    <group android:id="@+id/log"
+        android:checkableBehavior="single">
+
+        <item android:id="@+id/about"
+            android:title="About"/>
+
+        <item android:id="@+id/set"
+            android:title="Settings"/>
+
+    </group>
+</menu>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/whatsappdemo/app/src/main/res/drawable/ic_baseline_cloud_done_24.xml" value="0.20185185185185187" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/drawable/round.xml" value="0.20185185185185187" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_home.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_loginpage.xml" value="0.1" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_smsscheduler.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_splash.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_whatsapp_scheduler.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_whatsappbsns_scheduler.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_deleted.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_failed.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_pending.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_sent.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/header.xml" value="0.11510416666666666" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/menu/mainmenu.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/xml/whatsappservice.xml" value="0.24114583333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

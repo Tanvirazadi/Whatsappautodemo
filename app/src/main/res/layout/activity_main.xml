@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.eminz.Activity.MainActivity"
+    tools:openDrawer="start"
+    android:id="@+id/drawar">
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/purple_200"
+            app:title="Home" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/navdraw"
+        app:menu="@menu/mainmenu"
+        app:headerLayout="@layout/header"
+        android:layout_gravity="start"
+
+        />
+    <include layout="@layout/activity_home"/>
+
+
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
+

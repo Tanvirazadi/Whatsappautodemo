@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.eminz.Scheduler.SMSScheduler">
+    <EditText
+        android:id="@+id/phon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter Number"
+        android:inputType="number"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.174" />
+
+    <EditText
+        android:id="@+id/tx"
+        android:layout_width="221dp"
+        android:layout_height="139dp"
+        android:layout_marginBottom="4dp"
+        android:ems="10"
+        android:hint="Enter messeage"
+        android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/phon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/phon"
+        app:layout_constraintTop_toBottomOf="@+id/phon"
+        app:layout_constraintVertical_bias="0.131" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sms"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/phon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/phon"
+        app:layout_constraintTop_toBottomOf="@+id/tx"
+        app:layout_constraintVertical_bias="0.257" />
+
+    <Button
+        android:id="@+id/choos"
+        android:layout_width="110dp"
+        android:layout_height="83dp"
+        android:text="Contacts"
+        app:layout_constraintBottom_toBottomOf="@+id/phon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintStart_toStartOf="@+id/phon"
+        app:layout_constraintTop_toTopOf="@+id/phon"
+        app:layout_constraintVertical_bias="0.228" />
+
+    <Button
+        android:id="@+id/times"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/send"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/send"
+        app:layout_constraintTop_toBottomOf="@+id/send"
+        app:layout_constraintVertical_bias="0.156" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
