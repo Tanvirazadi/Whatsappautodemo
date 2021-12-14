@@ -1,0 +1,241 @@
+<resources>
+    <string name="app_name" translatable="false">whatsappdemo</string>
+
+
+    <string name="enter_messeag">संदेश दर्ज करें</string>
+    <string name="enter_numbe">नंबर डालें</string>
+    <string name="contac">संपर्क</string>
+    <string name="schedule">अनुसूची</string>
+    <string name="select_tim">समय चुनें</string>
+    <string name="select_date">तारीख़ चुनें</string>
+    <string name="every">हर एक</string>
+    <string name="end_after" >के बाद समाप्त करें</string>
+    <string name="enter_numbers">नंबर डालें</string>
+    <string name="contact" >संपर्क</string>
+    <string name="schedules">अनुसूची</string>
+    <string name="select_times">समय चुनें</string>
+    <string name="select_dat">तारीख़ चुनें</string>
+    <string name="enter_number">नंबर डालें</string>
+    <string name="enter_messeage">संदेश दर्ज करें</string>
+    <string name="contacts">संपर्क</string>
+    <string name="whatsapp">Whatsapp</string>
+    <string name="select_time">समय चुनें</string>
+    <string name="select_dates">तारीख़ चुनें</string>
+    <string name="skip">छोड़ें</string>
+    <string name="sign_in">साइन इन करें</string>
+    <string name="create_account">खाता बनाएं</string>
+    <string name="by_signing_up_you_agree_to_scheduler_s_terms_amp_use_and_privacy_policy"><![CDATA[By signing up, You agree to Scheduler\'s Terms&use and Privacy policy]]></string>
+    <string name="sign_ins">साइन इन करें</string>
+    <string name="usernam">प्रयोक्ता नाम</string>
+    <string name="passwords">पासवर्ड</string>
+    <string name="signing_in">साइन इन करें</string>asdfghjkkkkl;'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <string name="forget_password">पासवर्ड भूल गए?</string>
+    <string name="sign_ups">साइन अप करें</string>
+    <string name="name">नाम</string>
+    <string name="username">प्रयोक्ता नाम</string>
+    <string name="email">ईमेल</string>
+    <string name="password">पासवर्ड</string>
+    <string name="confirm_password">पासवर्ड की पुष्टि कीजिये</string>
+    <string name="sign_up">साइन अप करें</string>
+    <string name="pending">लंबित</string>
+    <string name="done">किया हुआ</string>
+    <string name="failed">असफल हुआ</string>
+    <string name="deleted">हटाए गए</string>
+    <string name="profile">प्रोफ़ाइल</string>
+    <string name="language">भाषा</string>
+    <string name="settings">पतिस्थिति</string>
+    <string name="about">बारे में</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="english">अंग्रेज़ी</string>
+    <string name="everys">Every</string>
+    <string name="to">To</string>
+    <string name="pendings">Pending</string>
+    <string name="sent">Sent</string>
+    <string name="faileds">Failed</string>
+</resources>

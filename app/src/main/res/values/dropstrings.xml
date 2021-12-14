@@ -1,0 +1,23 @@
+<resources>
+    <string name="names" translatable="false">Remind Me</string>
+    <string-array name="time">
+        <item>No Repeat</item>
+        <item>Hours</item>
+        <item>Days</item>
+        <item>Weeks</item>
+        <item>Months</item>
+        <item>Years</item>
+    </string-array>
+
+<string-array name="Numbers">
+
+    <item>Never</item>
+    <item>2 times</item>
+    <item>3 times</item>
+    <item>4 times</item>
+    <item>Cutom</item>
+
+
+
+</string-array>
+</resources>

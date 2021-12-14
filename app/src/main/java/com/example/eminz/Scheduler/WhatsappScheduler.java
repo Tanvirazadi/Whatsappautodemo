@@ -56,8 +56,7 @@ public class WhatsappScheduler extends AppCompatActivity  {
     String stayTime;
     String drop_item2;
     String drop_item;
-    String contentText;
-    String contentText2;
+  
     long timesys;
     String formattedDate;
     long timesys2;

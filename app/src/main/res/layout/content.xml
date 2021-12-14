@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/teal_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_200"
+        app:layout_constraintBottom_toTopOf="@+id/viewpag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tool"
+        app:layout_constraintVertical_bias="0.0"
+        app:tabTextColor="@color/white">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/pendingtab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pendings" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/senttab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sent" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/failedtab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/faileds" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="104dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tool"
+        tools:ignore="SpeakableTextPresentCheck">
+
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/floatingActionsMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="4dp"
+        app:fab_expandDirection="up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible">
+
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:background="#729FC6"
+            android:id="@+id/floating3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/black"
+            app:fab_icon="@drawable/busieness"
+            app:fab_size="normal"
+            app:fab_title="Whatsapp Business"
+            app:layout_constraintBottom_toTopOf="@+id/floatingActionsMenu"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="64dp"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/black"
+            app:fab_icon="@drawable/whatsapp"
+            app:fab_size="normal"
+            app:fab_title="Whatsapp"
+            app:layout_constraintBottom_toTopOf="@+id/floatingActionsMenu"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="140dp"
+            app:fab_colorNormal="@color/white"
+            app:fab_colorPressed="@color/black"
+            app:fab_icon="@drawable/sms"
+            app:fab_size="normal"
+            app:fab_title="SMS"
+            app:layout_constraintBottom_toTopOf="@+id/floatingActionsMenu"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
