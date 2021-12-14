@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.eminz.fragment.Sent"
-    android:layout_gravity="center_vertical">
-
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
 
     <TextView
-        android:textSize="60sp"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
+        android:id="@+id/deleteSmsLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello Sending" />
+        android:gravity="center"
+        android:layout_weight="1"
+        android:text="Press and hold to delete an SMS" />
 
+    <ListView
+        android:id="@+id/list_sms"
+        android:layout_width="match_parent"
+        android:layout_height="435dp"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false" />
 
-</FrameLayout>
+</LinearLayout>

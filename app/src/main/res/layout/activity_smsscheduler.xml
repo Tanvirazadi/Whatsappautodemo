@@ -5,71 +5,165 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.eminz.Scheduler.SMSScheduler">
-    <EditText
+
+
+
+    <AutoCompleteTextView
         android:id="@+id/phon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Enter Number"
-        android:inputType="number"
+        android:hint="@string/to"
+        android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintVertical_bias="0.035"
+        />
+
 
     <EditText
+        android:paddingStart="5dp"
         android:id="@+id/tx"
-        android:layout_width="221dp"
+        android:layout_width="match_parent"
         android:layout_height="139dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="1dp"
         android:ems="10"
-        android:hint="Enter messeage"
-        android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textPersonName"
+        android:textIsSelectable="true"
+        android:hint="@string/enter_messeage"
+        android:inputType="textLongMessage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/phon"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/phon"
         app:layout_constraintTop_toBottomOf="@+id/phon"
-        app:layout_constraintVertical_bias="0.131" />
+        app:layout_constraintVertical_bias="0.051"
+        tools:ignore="RtlSymmetry" />
 
-    <Button
-        android:id="@+id/send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sms"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/phon"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/phon"
-        app:layout_constraintTop_toBottomOf="@+id/tx"
-        app:layout_constraintVertical_bias="0.257" />
-
-    <Button
+    <ImageButton
         android:id="@+id/choos"
         android:layout_width="110dp"
         android:layout_height="83dp"
-        android:text="Contacts"
+        android:src="@drawable/ic_baseline_group_24"
+        android:text="@string/contacts"
         app:layout_constraintBottom_toBottomOf="@+id/phon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.926"
         app:layout_constraintStart_toStartOf="@+id/phon"
         app:layout_constraintTop_toTopOf="@+id/phon"
-        app:layout_constraintVertical_bias="0.228" />
+        app:layout_constraintVertical_bias="0.228"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="TODO" />
+
+    <Button
+        android:id="@+id/send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="428dp"
+        android:text="@string/schedule"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/phon"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/phon" />
 
     <Button
         android:id="@+id/times"
+        android:layout_width="96dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="140dp"
+        android:text="@string/select_time"
+        app:layout_constraintStart_toStartOf="@+id/send"
+        app:layout_constraintTop_toTopOf="@+id/send" />
+
+    <Button
+        android:id="@+id/dates"
+        android:layout_width="91dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="28dp"
+        android:text="@string/select_date"
+        app:layout_constraintStart_toEndOf="@+id/times"
+        app:layout_constraintTop_toTopOf="@+id/times" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/send"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/send"
-        app:layout_constraintTop_toBottomOf="@+id/send"
-        app:layout_constraintVertical_bias="0.156" />
+        android:layout_marginEnd="36dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit1"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/spinner2"
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="36dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner1"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="76dp"
+        android:padding="5dp"
+        android:text="@string/every"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/send" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:padding="5dp"
+        android:text="@string/end_after"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/edit1"
+        android:layout_width="104dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text=""
+        app:layout_constraintEnd_toStartOf="@+id/date"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toEndOf="@+id/send"
+        app:layout_constraintTop_toBottomOf="@+id/times"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/edit2"
+        android:layout_width="104dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="168dp"
+        android:ems="10"
+        android:inputType="number"
+        android:text=""
+        app:layout_constraintEnd_toStartOf="@+id/dates"
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintStart_toEndOf="@+id/send"
+        app:layout_constraintTop_toBottomOf="@+id/times"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

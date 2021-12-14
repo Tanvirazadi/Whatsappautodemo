@@ -9,19 +9,11 @@
     android:id="@+id/drawar">
 
 
+    <include
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        layout="@layout/content"/>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tool"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/purple_200"
-            app:title="Home" />
-
-    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
@@ -32,7 +24,7 @@
         android:layout_gravity="start"
 
         />
-    <include layout="@layout/activity_home"/>
+
 
 
 
@@ -40,5 +32,3 @@
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
-
-

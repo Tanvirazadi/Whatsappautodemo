@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -6,16 +7,32 @@
         android:checkableBehavior="single">
 
         <item android:id="@+id/lang"
-            android:title="Language"
+            android:title="@string/language"
             android:icon="@drawable/ic_baseline_language_24"
-            />
+            >
+
+            <menu>
+
+                <item android:id="@+id/hindi"
+                    android:title="@string/hindi">
+
+                </item>
+                <item android:id="@+id/eng"
+                    android:title="@string/english" />
+
+
+
+
+
+            </menu>
+
+        </item>
 
         <item android:id="@+id/profile"
-            android:title="Profile"
+            android:title="@string/profile"
             />
 
-        <item android:id="@+id/list"
-            android:title="Broadcast Lists"/>
+
 
     </group>
 
@@ -24,17 +41,17 @@
 
 
         <item android:id="@+id/pend"
-            android:title="Pending"/>
+            android:title="@string/pending"/>
 
         <item android:id="@+id/don"
-            android:title="Done"
+            android:title="@string/done"
             android:icon="@drawable/ic_baseline_cloud_done_24"/>
 
         <item android:id="@+id/Fail"
-            android:title="Failed"/>
+            android:title="@string/failed"/>
 
         <item android:id="@+id/delete"
-            android:title="Deleted"/>
+            android:title="@string/deleted"/>
 
 
 
@@ -61,10 +78,10 @@
         android:checkableBehavior="single">
 
         <item android:id="@+id/about"
-            android:title="About"/>
+            android:title="@string/about"/>
 
         <item android:id="@+id/set"
-            android:title="Settings"/>
+            android:title="@string/settings"/>
 
     </group>
 </menu>

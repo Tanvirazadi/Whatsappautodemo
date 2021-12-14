@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/style1"
-    tools:context=".activity.Loginpage">
+    tools:context="com.example.eminz.Activity.Loginpage"
+    >
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -42,7 +43,7 @@
         android:id="@+id/skipo"
         android:layout_width="84dp"
         android:layout_height="50dp"
-        android:text="Skip"
+        android:text="@string/skip"
         android:textAllCaps="true"
         android:textColor="#000000"
         android:textStyle="bold|italic"
@@ -51,7 +52,8 @@
         app:layout_constraintHorizontal_bias="0.951"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
         app:layout_constraintTop_toTopOf="@+id/guideline9"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.038"
+        tools:ignore="RtlHardcoded" />
 
 
     <TextView
@@ -79,7 +81,7 @@
         android:ems="10"
         android:foregroundGravity="center"
         android:gravity="center"
-        android:text="SIGN IN"
+        android:text="@string/sign_in"
         android:textColor="#DD2C00"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintHorizontal_bias="0.423"
@@ -109,7 +111,7 @@
         android:layout_width="120dp"
         android:layout_height="0dp"
         android:layout_marginTop="48dp"
-        android:text="CREATE ACCOUNT"
+        android:text="@string/create_account"
         android:textStyle="italic|bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintHorizontal_bias="0.489"
@@ -122,11 +124,12 @@
         android:layout_height="78dp"
         android:layout_marginTop="44dp"
         android:autoLink="web"
-        android:text="By signing up, You agree to Scheduler's Terms&amp;use and Privacy policy"
+        android:text="@string/by_signing_up_you_agree_to_scheduler_s_terms_amp_use_and_privacy_policy"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/guideline11"
         app:layout_constraintStart_toStartOf="@+id/guideline10"
         app:layout_constraintTop_toBottomOf="@+id/create"
-        app:layout_constraintVertical_bias="0.492" />
+        app:layout_constraintVertical_bias="0.492"
+        tools:ignore="SmallSp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,7 +80,7 @@ public class WhatsappbsnsScheduler extends AppCompatActivity {
         chose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new MultiContactPicker.Builder(WhatsappbsnsScheduler.this) //Activity/fragment context
+                new MultiContactPicker.Builder(WhatsappbsnsScheduler.this) //Activity/com.example.eminz.fragment context
                         .hideScrollbar(false) //Optional - default: false
                         .showTrack(true) //Optional - default: true
                         .searchIconColor(Color.WHITE) //Option - default: White
