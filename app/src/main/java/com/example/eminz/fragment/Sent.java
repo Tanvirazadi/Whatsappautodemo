@@ -23,10 +23,7 @@ import java.util.ArrayList;
 
 
 public class Sent extends Fragment {
-    private static final String TAG = "tab_sent_sms.xml";
 
-    private SmsDatabaseHelper smsDatabaseHelper;
-    private ListView list;
 
 
     @Nullable

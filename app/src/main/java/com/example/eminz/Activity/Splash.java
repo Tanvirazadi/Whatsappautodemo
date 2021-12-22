@@ -29,19 +29,31 @@ public class Splash extends AppCompatActivity {
         img.startAnimation(zoom);
 
         Handler h = new Handler();
+
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
+                SharedPreferences pref = getSharedPreferences("activity", MODE_PRIVATE);
+                boolean loginskip = pref.getBoolean("loginskip", false);
 
-                Intent i = new Intent(getApplicationContext(),
-                        Loginpage.class);
-                startActivity(i);
+                if (loginskip){
+                    Intent i = new Intent(getApplicationContext(),
+                            MainActivity.class);
+                    startActivity(i);
+                }else {
+                    Intent i = new Intent(getApplicationContext(),
+                            Loginpage.class);
+                    startActivity(i);
+                }
                 finish();
+
+
+
+
 
 
             }
         }, 4000);
-
 
 
     }

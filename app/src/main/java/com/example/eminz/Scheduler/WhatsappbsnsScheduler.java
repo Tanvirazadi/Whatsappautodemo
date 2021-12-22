@@ -41,9 +41,9 @@ public class WhatsappbsnsScheduler extends AppCompatActivity {
     Button chose, whtsapp;
     List<ContactResult> results=new ArrayList<>();
     Button time,date;
-    private int hr=100;
-    private int min=100;
-    private int sec=100;
+    private final int hr=100;
+    private final int min=100;
+    private final int sec=100;
     private final int days=1;
     int day=31;
     int mon=12;
@@ -59,8 +59,8 @@ public class WhatsappbsnsScheduler extends AppCompatActivity {
         sms = findViewById(R.id.txt);
         chose = findViewById(R.id.choose);
         whtsapp = findViewById(R.id.whtsapp);
-        time=findViewById(R.id.time);
-        date=findViewById(R.id.date);
+        time=findViewById(R.id.whatsappdate);
+        date=findViewById(R.id.whatsappdate);
 
         Dexter.withContext(this)
                 .withPermissions(

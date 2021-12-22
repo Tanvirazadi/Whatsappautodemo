@@ -26,9 +26,7 @@ import com.example.whatsappdemo.R;
 import java.util.ArrayList;
 
 public class Pending extends Fragment {
-    private static final String TAG = "activity_pending_sms.xml";
-    private SmsDatabaseHelper smsDatabaseHelper;
-    private ListView list;
+
 
     @Nullable
     @Override

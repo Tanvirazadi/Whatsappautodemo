@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">whatsappdemo</string>
+    <string name="app_name" translatable="false">Rminz</string>
 
 
     <string name="enter_messeag">संदेश दर्ज करें</string>
@@ -238,4 +238,5 @@
     <string name="pendings">Pending</string>
     <string name="sent">Sent</string>
     <string name="faileds">Failed</string>
+    <string name="scheduless">Schedule</string>
 </resources>

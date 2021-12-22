@@ -12,8 +12,8 @@ import androidx.work.WorkerParameters;
 import java.net.URLEncoder;
 import java.util.Objects;
 
-public class sendMessageWorker extends Worker {
-    public sendMessageWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+public class periodicworker extends Worker {
+    public periodicworker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 

@@ -27,10 +27,10 @@ public class SmsAdapter extends ArrayAdapter<Sms> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.sms_layout, parent, false);
         }
         // Initialise views.
-        TextView display_name = (TextView) convertView.findViewById(R.id.display_name);
-        TextView display_messageDate = (TextView) convertView.findViewById(R.id.display_messageDate);
-        TextView display_messageTime = (TextView) convertView.findViewById(R.id.display_messageTime);
-        TextView display_message = (TextView) convertView.findViewById(R.id.display_message);
+        TextView display_name = convertView.findViewById(R.id.display_name);
+        TextView display_messageDate = convertView.findViewById(R.id.display_messageDate);
+        TextView display_messageTime = convertView.findViewById(R.id.display_messageTime);
+        TextView display_message = convertView.findViewById(R.id.display_message);
 
         // set values of text views
         display_name.setText(sms.name);

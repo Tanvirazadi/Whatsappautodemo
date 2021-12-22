@@ -1,5 +1,6 @@
 package com.example.eminz.fragment;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.eminz.Model.Sms;
@@ -25,16 +25,13 @@ import com.example.whatsappdemo.R;
 
 import java.util.ArrayList;
 
-
 public class Failed extends Fragment {
-    private static final String TAG = "tab_sent_sms.xml";
-    private SmsDatabaseHelper smsDatabaseHelper;
-    private ListView list;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_failed,container,false);
+        return inflater.inflate(R.layout.fragment_failed, container, false);
 
     }
 }

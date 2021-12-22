@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:id="@+id/main"
-        android:checkableBehavior="single">
+        android:checkableBehavior="single"/>
 
         <item android:id="@+id/lang"
             android:title="@string/language"
@@ -34,29 +34,7 @@
 
 
 
-    </group>
 
-    <group android:checkableBehavior="single"
-        android:id="@+id/status">
-
-
-        <item android:id="@+id/pend"
-            android:title="@string/pending"/>
-
-        <item android:id="@+id/don"
-            android:title="@string/done"
-            android:icon="@drawable/ic_baseline_cloud_done_24"/>
-
-        <item android:id="@+id/Fail"
-            android:title="@string/failed"/>
-
-        <item android:id="@+id/delete"
-            android:title="@string/deleted"/>
-
-
-
-
-    </group>
 
     <group android:checkableBehavior="single"
         android:id="@+id/center">

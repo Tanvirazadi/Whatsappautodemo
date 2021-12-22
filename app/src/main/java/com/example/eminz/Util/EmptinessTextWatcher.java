@@ -9,7 +9,7 @@ import com.example.eminz.Scheduler.SMSScheduler;
 import com.example.whatsappdemo.R;
 
 public class EmptinessTextWatcher implements TextWatcher {
-    private SMSScheduler addSmsActivity;
+    private final SMSScheduler addSmsActivity;
     private final AutoCompleteTextView formContact;
     private final EditText sms;
 

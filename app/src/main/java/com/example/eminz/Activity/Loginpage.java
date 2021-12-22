@@ -3,7 +3,6 @@ package com.example.eminz.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,8 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whatsappdemo.R;
 import com.example.eminz.Util.Util;
+import com.example.whatsappdemo.R;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -22,13 +21,12 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 
-public class Loginpage extends AppCompatActivity  implements FacebookCallback<LoginResult> {
+public class Loginpage extends AppCompatActivity implements FacebookCallback<LoginResult> {
     Button signin;
-    TextView skipo,creato;
+    TextView skipo, creato;
     CheckBox checkBox;
     CallbackManager manager;
     LoginButton fb;
-
 
 
     @Override
@@ -38,26 +36,21 @@ public class Loginpage extends AppCompatActivity  implements FacebookCallback<Lo
 
 
         Util.keyhashes(this);
-        manager=CallbackManager.Factory.create();
-        fb=findViewById(R.id.facebook);
-        fb.registerCallback(manager,this);
-        
+        manager = CallbackManager.Factory.create();
+        fb = findViewById(R.id.facebook);
+        fb.registerCallback(manager, this);
 
 
-        signin=findViewById(R.id.signin);
-        skipo=findViewById(R.id.skipo);
-        creato=findViewById(R.id.create);
-        checkBox=findViewById(R.id.checkBox);
-
-
-
-
+        signin = findViewById(R.id.signin);
+        skipo = findViewById(R.id.skipo);
+        creato = findViewById(R.id.create);
+        checkBox = findViewById(R.id.checkBox);
 
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(), Signinpage.class);
+                Intent intent = new Intent(getApplicationContext(), Signinpage.class);
                 startActivity(intent);
 
             }
@@ -65,15 +58,18 @@ public class Loginpage extends AppCompatActivity  implements FacebookCallback<Lo
         });
 
 
-
         skipo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkBox.isChecked()){
-                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                if (checkBox.isChecked()) {
+
+                    SharedPreferences.Editor sharedPreferences = getSharedPreferences("activity", MODE_PRIVATE).edit();
+                    sharedPreferences.putBoolean("loginskip", true);
+                    sharedPreferences.apply();
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                }
-             else {
+                } else {
                     Toast.makeText(getApplicationContext(), "You have to agree to Scheduler's Terms of use and privacy policy", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -82,11 +78,10 @@ public class Loginpage extends AppCompatActivity  implements FacebookCallback<Lo
         creato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),Signuppage.class);
+                Intent intent = new Intent(getApplicationContext(), Signuppage.class);
                 startActivity(intent);
             }
         });
-
 
 
     }
@@ -111,7 +106,7 @@ public class Loginpage extends AppCompatActivity  implements FacebookCallback<Lo
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        manager.onActivityResult(requestCode,resultCode,data);
+        manager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

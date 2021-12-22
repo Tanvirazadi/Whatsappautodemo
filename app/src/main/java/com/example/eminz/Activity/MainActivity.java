@@ -5,37 +5,26 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.eminz.Scheduler.SMSScheduler;
 import com.example.eminz.Scheduler.WhatsappScheduler;
-import com.example.eminz.Service.Whatsappaccessibility;
 import com.example.eminz.fragment.Fragmentadapter;
 import com.example.whatsappdemo.R;
 import com.example.eminz.Scheduler.WhatsappbsnsScheduler;
-import com.example.eminz.fragment.Deleted;
-import com.example.eminz.fragment.Failed;
-import com.example.eminz.fragment.Pending;
-import com.example.eminz.fragment.Sent;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,8 +32,6 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -137,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
+
+
+
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,WhatsappScheduler.class);
