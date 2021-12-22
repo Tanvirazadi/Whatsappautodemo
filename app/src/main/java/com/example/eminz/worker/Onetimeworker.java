@@ -30,56 +30,65 @@ public class Onetimeworker extends Worker {
     @Override
     public Result doWork() {
 
-        Log.d("onetimeworker", getInputData().toString());
+        Log.d("onetimewhatsapp", "inside do work");
         String everytime = getInputData().getString("Everytime");
         String endingafter = getInputData().getString("ending");
         String message = getInputData().getString("message");
         String[] numbers = getInputData().getStringArray("contacts");
         String dropitem = getInputData().getString("dropitem");
         String dropitem2 = getInputData().getString("dropitem2");
-        Log.d("onetimeworker ", everytime + " ending " + endingafter + " dropitem " + dropitem + " dropitem2 " + dropitem2);
-
-        Data periodicdata = new Data.Builder()
-                .putString("message", message)
-                .putStringArray("contacts", numbers)
-                .build();
 
 
-        PeriodicWorkRequest sendMessagework = new PeriodicWorkRequest.Builder(periodicworker.class, calculatespin(everytime, dropitem),
-                TimeUnit.MILLISECONDS)
-                .setInputData(periodicdata)
-                .addTag("send_periodic_message_work")
-                .build();
-
-
-        WorkManager.getInstance(getApplicationContext()).enqueueUniquePeriodicWork("send_periodic_message_work",
-                ExistingPeriodicWorkPolicy.REPLACE, sendMessagework);
-
+        Log.d("onetimewhatsapp", "periodicscheduler");
 
         try {
-            if (!TextUtils.isEmpty(everytime) && !TextUtils.isEmpty(endingafter)) {
+            if (!TextUtils.isEmpty(everytime)) {
+                Data periodicdata = new Data.Builder()
+                        .putString("message", message)
+                        .putStringArray("contacts", numbers)
+                        .build();
 
-                if (numbers.length != 0) {
-                    for (int j = 0; j < numbers.length; j++) {
-                        PackageManager packageManager = Objects.requireNonNull(getApplicationContext()).getPackageManager();
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        try {
-                            String url = "https://api.whatsapp.com/send?phone=" + numbers[j] + "&text=" + URLEncoder.encode(message + "   ", "UTF-8");
-                            intent.setPackage("com.whatsapp");
-                            intent.setData(Uri.parse(url));
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            if (intent.resolveActivity(packageManager) != null) {
-                                getApplicationContext().startActivity(intent);
-                                Thread.sleep(5000);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+
+                PeriodicWorkRequest sendMessagework = new PeriodicWorkRequest.Builder(periodicworker.class, calculatespin(everytime, dropitem),
+                        TimeUnit.MILLISECONDS)
+                        .setInputData(periodicdata)
+                        .addTag("send_periodic_message_work")
+                        .build();
+
+
+                WorkManager.getInstance(getApplicationContext()).enqueueUniquePeriodicWork("send_periodic_message_work",
+                        ExistingPeriodicWorkPolicy.REPLACE, sendMessagework);
+
+
+            } else {
+                Log.d("onetimewhatsapp", "Condition not satisfied");
+            }
+
+
+            if (numbers.length != 0) {
+                Log.d("onetimewhatsapp", "inside of 2nd if");
+                for (int j = 0; j < numbers.length; j++) {
+                    Log.d("onetimewhatsapp", "inside for " + "");
+                    PackageManager packageManager = Objects.requireNonNull(getApplicationContext()).getPackageManager();
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    try {
+                        String url = "https://api.whatsapp.com/send?phone=" + numbers[j] + "&text=" + URLEncoder.encode(message + "   ", "UTF-8");
+                        intent.setPackage("com.whatsapp");
+                        intent.setData(Uri.parse(url));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        if (intent.resolveActivity(packageManager) != null) {
+                            getApplicationContext().startActivity(intent);
+                            Thread.sleep(5000);
                         }
-
+                    } catch (Exception e) {
+                        Log.d("onetimewhatsapp", "Exception " + e.getMessage());
+                        e.printStackTrace();
                     }
+
                 }
             }
         } catch (Exception e) {
+            Log.d("onetimesms", "Exception2 " + e.getMessage());
             e.printStackTrace();
         }
 
