@@ -34,6 +34,7 @@ public class Smsonetimeworker extends Worker {
         String everytime = getInputData().getString("Everytime");
         String endingafter = getInputData().getString("ending");
         String message = getInputData().getString("message");
+        Log.d("onetimesms", "text2 " + message);
         String[] numbers = getInputData().getStringArray("contacts");
         String dropitem = getInputData().getString("dropitem");
         String dropitem2 = getInputData().getString("dropitem2");
@@ -66,7 +67,7 @@ public class Smsonetimeworker extends Worker {
             if (numbers.length != 0) {
                 Log.d("onetimesms", "inside of 2nd if");
                 for (int j = 0; j < numbers.length; j++) {
-                    Log.d("onetimesms", "inside for " + "");
+                    Log.d("onetimesms", "inside for " + message);
 
                     sendSMS(numbers[j], message);
                 }
@@ -187,6 +188,7 @@ public class Smsonetimeworker extends Worker {
 
         Log.d("onetimesms", "inside sendSms");
         SmsManager sms = SmsManager.getDefault();
+        Log.d("onetimesms", "text " + message);
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
         Log.d("onetimesms", "sendsms done");
     }

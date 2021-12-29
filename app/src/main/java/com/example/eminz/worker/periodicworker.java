@@ -37,13 +37,14 @@ public class periodicworker extends Worker {
                         if (intent.resolveActivity(packageManager) != null) {
                             getApplicationContext().startActivity(intent);
                             Thread.sleep(5000);
+                        } else {
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

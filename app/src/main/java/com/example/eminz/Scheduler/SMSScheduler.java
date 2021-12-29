@@ -3,6 +3,7 @@ package com.example.eminz.Scheduler;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.SEND_SMS;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -70,7 +71,7 @@ public class SMSScheduler extends AppCompatActivity {
     int day;
     int mon;
     int years;
-    private TextView time;
+    private TextView time, battery, screen;
     private EditText messageInput, numberInput, nameInput;
     private int hr = 100;
     private int min = 100;
@@ -93,6 +94,8 @@ public class SMSScheduler extends AppCompatActivity {
         date = findViewById(R.id.smsdate);
         everytime = findViewById(R.id.edit11);
         endafter = findViewById(R.id.edit12);
+        battery = findViewById(R.id.battery);
+        screen = findViewById(R.id.screenlock);
 
         //Initialise database
 
@@ -108,6 +111,22 @@ public class SMSScheduler extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin2.setAdapter(adapter2);
         drop_item2 = spin2.getSelectedItem().toString();
+        battery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                startActivity(intent);
+            }
+        });
+        screen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+                startActivity(intent);
+            }
+        });
 
 
         time.setOnClickListener(new View.OnClickListener() {
@@ -196,7 +215,7 @@ public class SMSScheduler extends AppCompatActivity {
 
                                 Data messageData = new Data.Builder()
 
-                                        .putString("message", sms.getText().toString())
+                                        .putString("message", messageInput.getText().toString())
                                         .putStringArray("contacts", numbers)
                                         .putString("Everytime", everytime.getText().toString())
                                         .putString("ending", endafter.getText().toString())

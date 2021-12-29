@@ -20,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -29,11 +28,9 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-
-import com.example.eminz.worker.Onetimeworker;
-import com.example.eminz.worker.periodicworker;
-import com.example.whatsappdemo.R;
 import com.example.eminz.Service.Whatsappaccessibility;
+import com.example.eminz.worker.Onetimeworker;
+import com.example.whatsappdemo.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -45,7 +42,6 @@ import com.wafflecopter.multicontactpicker.MultiContactPicker;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,7 +51,7 @@ import java.util.concurrent.TimeUnit;
 public class WhatsappScheduler extends AppCompatActivity {
 
     private static final int CONTACT_PICKER_REQUEST = 20;
-    long days;
+    int days = 1;
 
     String repeatTime;
     String stayTime;
@@ -99,7 +95,6 @@ public class WhatsappScheduler extends AppCompatActivity {
                     }
                 });
         builder.create().show();
-
 
 
         phn = findViewById(R.id.phone);
@@ -151,9 +146,8 @@ public class WhatsappScheduler extends AppCompatActivity {
 
             public void onClick(View v) {
 
-                    opencontact();
-                }
-
+                opencontact();
+            }
 
 
         });
@@ -234,13 +228,12 @@ public class WhatsappScheduler extends AppCompatActivity {
                                         .putString("dropitem2", spin2.getSelectedItem().toString())
                                         .build();
 
-
-                                OneTimeWorkRequest sendMessages = new OneTimeWorkRequest.Builder(Onetimeworker.class)
+                                OneTimeWorkRequest sendMessagework = new OneTimeWorkRequest.Builder(Onetimeworker.class)
                                         .setInitialDelay(flexTime, TimeUnit.MILLISECONDS)
-                                        .setInputData(messageData).build();
+                                        .setInputData(messageData)
+                                        .build();
 
-
-                                WorkManager.getInstance(getApplicationContext()).enqueue(sendMessages);
+                                WorkManager.getInstance().enqueue(sendMessagework);
                                 Toast.makeText(WhatsappScheduler.this, "Message is scheduled", Toast.LENGTH_SHORT).show();
 
 
@@ -319,7 +312,9 @@ public class WhatsappScheduler extends AppCompatActivity {
         long delta = Math.abs((cal3.getTimeInMillis() - cal1.getTimeInMillis()));
 
         return delta;
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

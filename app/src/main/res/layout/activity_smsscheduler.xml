@@ -7,13 +7,12 @@
     tools:context="com.example.eminz.Scheduler.SMSScheduler">
 
 
-
     <EditText
         android:id="@+id/phon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/enter_number"
+        android:hint=""
         android:inputType="phone"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +20,8 @@
         app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034" />
+        app:layout_constraintVertical_bias="0.034"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/smstxt"
@@ -35,10 +35,10 @@
         app:barrierMargin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/phon"
-        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/phon"
         app:layout_constraintTop_toBottomOf="@+id/phon"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.695"
         tools:ignore="RtlSymmetry" />
 
     <ImageButton
@@ -142,26 +142,26 @@
         app:layout_constraintTop_toBottomOf="@+id/smstxt" />
 
     <TextView
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:id="@+id/smsdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="16dp"
         android:text="No Date"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/smstxt" />
 
     <TextView
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:id="@+id/smstime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
         android:layout_marginTop="16dp"
         android:text="No time"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/smsdate"
         app:layout_constraintTop_toBottomOf="@+id/smstxt" />
 
@@ -176,6 +176,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit12" />
 
+    <TextView
+        android:id="@+id/battery"
+        android:layout_width="252dp"
+        android:layout_height="28dp"
+        android:layout_marginBottom="140dp"
+        android:text="Battery Optimization"
+        android:textColor="#5F9BB8"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/screenlock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
+        android:text="Screen Lock"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

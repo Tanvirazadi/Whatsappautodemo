@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whatsappdemo.R;
 import com.example.eminz.Sqlite.Databsehelper;
+import com.example.whatsappdemo.R;
 
 
 public class Signinpage extends AppCompatActivity implements View.OnClickListener {
@@ -63,7 +63,7 @@ public class Signinpage extends AppCompatActivity implements View.OnClickListene
                 Boolean result = databsehelper.findpassword(username, password);
 
                 if (result) {
-                    Intent intent = new Intent(Signinpage.this, Home.class);
+                    Intent intent = new Intent(Signinpage.this, MainActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Username or password is invalid", Toast.LENGTH_SHORT).show();

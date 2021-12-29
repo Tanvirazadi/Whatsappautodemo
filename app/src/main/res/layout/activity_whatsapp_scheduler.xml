@@ -141,26 +141,26 @@
         app:layout_constraintTop_toBottomOf="@+id/txt" />
 
     <TextView
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:id="@+id/whatsappdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="16dp"
         android:text="No Date"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/txt" />
 
     <TextView
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
         android:layout_marginTop="16dp"
         android:text="No time"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/whatsappdate"
         app:layout_constraintTop_toBottomOf="@+id/txt" />
 
