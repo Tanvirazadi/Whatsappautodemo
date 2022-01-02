@@ -29,6 +29,11 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.example.eminz.Service.Whatsappaccessibility;
+import com.example.eminz.database.AppDatabase;
+import com.example.eminz.database.AppExecutors;
+import com.example.eminz.database.DatabaseClient;
+import com.example.eminz.database.daos.ScheduleDao;
+import com.example.eminz.database.entities.Schedule;
 import com.example.eminz.worker.Onetimeworker;
 import com.example.whatsappdemo.R;
 import com.karumi.dexter.Dexter;
@@ -218,15 +223,42 @@ public class WhatsappScheduler extends AppCompatActivity {
                                 Log.d("spin1", spin1.getSelectedItem().toString() + "" + " spin2 " + spin2.getSelectedItem().toString() + "");
 
 
+                                String message = sms.getText().toString();
+                                final String every = everytime.getText().toString();
+                                final String endAfter = endafter.getText().toString();
+                                String drop1 = spin1.getSelectedItem().toString();
+                                String drop2 = spin2.getSelectedItem().toString();
+                                int everyInt = 0, repeatCount = 0;
+                                try{
+                                    everyInt = Integer.parseInt(every);
+                                    repeatCount = Integer.parseInt(endAfter);
+                                } catch (Exception ignored){
+
+                                }
+
+
                                 Data messageData = new Data.Builder()
 
-                                        .putString("message", sms.getText().toString())
+                                        .putString("message", message)
                                         .putStringArray("contacts", numbers)
-                                        .putString("Everytime", everytime.getText().toString())
-                                        .putString("ending", endafter.getText().toString())
-                                        .putString("dropitem", spin1.getSelectedItem().toString())
-                                        .putString("dropitem2", spin2.getSelectedItem().toString())
+                                        .putString("Everytime", every)
+                                        .putString("ending", endAfter)
+                                        .putString("dropitem", drop1)
+                                        .putString("dropitem2", drop2)
                                         .build();
+
+                                Schedule schedule = new Schedule("WhatsApp",TextUtils.join(",",numbers),message,flexTime,
+                                        everyInt,drop1,repeatCount,repeatCount,"Pending");
+
+                                AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+                                ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+
+                                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        scheduleDao.insert(schedule);
+                                    }
+                                });
 
                                 OneTimeWorkRequest sendMessagework = new OneTimeWorkRequest.Builder(Onetimeworker.class)
                                         .setInitialDelay(flexTime, TimeUnit.MILLISECONDS)

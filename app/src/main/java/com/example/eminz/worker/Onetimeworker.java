@@ -75,6 +75,7 @@ public class Onetimeworker extends Worker {
                         intent.setPackage("com.whatsapp");
                         intent.setData(Uri.parse(url));
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                         if (intent.resolveActivity(packageManager) != null) {
                             Log.d("onetimewhatsapp", "inside resolver");
                             getApplicationContext().startActivity(intent);

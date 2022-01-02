@@ -24,15 +24,18 @@
         <activity
             android:name="com.example.eminz.Scheduler.WhatsappbsnsScheduler"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/mystyle"/>
         <activity
             android:name="com.example.eminz.Scheduler.WhatsappScheduler"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/mystyle"/>
         <activity
             android:name="com.example.eminz.Scheduler.SMSScheduler"
             android:exported="true"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/mystyle"/>
         <activity
             android:name="com.example.eminz.Activity.Signinpage"
             android:exported="true"
@@ -45,11 +48,6 @@
             android:name="com.example.eminz.Activity.Loginpage"
             android:exported="true"
             android:screenOrientation="portrait" />
-        <activity
-            android:name="com.example.eminz.Activity.Home"
-            android:exported="true"
-            android:screenOrientation="portrait" />
-
         <service
             android:name="com.example.eminz.Service.MysmsService"
             android:exported="false" />

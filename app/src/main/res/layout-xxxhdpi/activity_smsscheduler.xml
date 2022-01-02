@@ -17,16 +17,16 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034"
+        app:layout_constraintVertical_bias="0.032"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/smstxt"
-        android:layout_width="match_parent"
-        android:layout_height="139dp"
+        android:layout_width="417dp"
+        android:layout_height="145dp"
         android:layout_marginBottom="536dp"
         android:ems="50"
         android:hint="@string/enter_messeage"
@@ -38,13 +38,13 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/phon"
         app:layout_constraintTop_toBottomOf="@+id/phon"
-        app:layout_constraintVertical_bias="0.695"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="RtlSymmetry" />
 
     <ImageButton
         android:id="@+id/choos"
-        android:layout_width="110dp"
-        android:layout_height="83dp"
+        android:layout_width="71dp"
+        android:layout_height="48dp"
         android:src="@drawable/ic_baseline_group_24"
         android:text="@string/contacts"
         app:layout_constraintBottom_toBottomOf="@+id/phon"
@@ -59,8 +59,8 @@
         android:id="@+id/textView7"
         android:layout_width="86dp"
         android:layout_height="30dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="440dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="328dp"
         android:paddingStart="5dp"
         android:text="@string/everys"
         android:textSize="18sp"
@@ -73,12 +73,12 @@
         android:id="@+id/edit11"
         android:layout_width="65dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="432dp"
+        android:layout_marginBottom="256dp"
         android:inputType="number"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -86,8 +86,8 @@
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="444dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="268dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit11"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -97,7 +97,7 @@
         android:layout_width="86dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="384dp"
+        android:layout_marginBottom="192dp"
         android:paddingStart="5dp"
         android:text="@string/end_after"
         android:textSize="18sp"
@@ -110,12 +110,12 @@
         android:id="@+id/edit12"
         android:layout_width="65dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="376dp"
+        android:layout_marginBottom="192dp"
         android:inputType="number"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintHorizontal_bias="0.195"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -123,8 +123,8 @@
         android:id="@+id/spinner2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginBottom="388dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginBottom="208dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit11"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -134,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="140dp"
         android:text="Schedule"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -145,8 +145,8 @@
         android:id="@+id/smsdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="60dp"
         android:text="No Date"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -157,50 +157,13 @@
         android:id="@+id/smstime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="60dp"
         android:text="No time"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/smsdate"
         app:layout_constraintTop_toBottomOf="@+id/smstxt" />
-
-    <Button
-        android:id="@+id/smsschedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="schedule"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit12" />
-
-    <TextView
-        android:id="@+id/battery"
-        android:layout_width="252dp"
-        android:layout_height="28dp"
-        android:layout_marginBottom="140dp"
-        android:text="Battery Optimization"
-        android:textColor="#5F9BB8"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/screenlock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
-        android:text="Screen Lock"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

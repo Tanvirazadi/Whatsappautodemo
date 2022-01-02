@@ -12,6 +12,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -68,9 +72,9 @@ public class SMSScheduler extends AppCompatActivity {
     String drop_item;
     Context context;
     List<ContactResult> results = new ArrayList<>();
-    int day;
-    int mon;
-    int years;
+    int day=31;
+    int mon=11;
+    int years=1;
     private TextView time, battery, screen;
     private EditText messageInput, numberInput, nameInput;
     private int hr = 100;
@@ -94,8 +98,7 @@ public class SMSScheduler extends AppCompatActivity {
         date = findViewById(R.id.smsdate);
         everytime = findViewById(R.id.edit11);
         endafter = findViewById(R.id.edit12);
-        battery = findViewById(R.id.battery);
-        screen = findViewById(R.id.screenlock);
+
 
         //Initialise database
 
@@ -111,22 +114,22 @@ public class SMSScheduler extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin2.setAdapter(adapter2);
         drop_item2 = spin2.getSelectedItem().toString();
-        battery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-                startActivity(intent);
-            }
-        });
-        screen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
-                startActivity(intent);
-            }
-        });
+//        battery.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent intent = new Intent();
+//                intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+//                startActivity(intent);
+//            }
+//        });
+//        screen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+//                startActivity(intent);
+//            }
+//        });
 
 
         time.setOnClickListener(new View.OnClickListener() {
@@ -201,51 +204,7 @@ public class SMSScheduler extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (hr != 100 && min != 100) {
-                    if (day != 31 && mon != 12 && years != 1) {
 
-                        if (!results.isEmpty()) {
-                            if (!sms.getText().toString().isEmpty()) {
-                                List<String> numbersList = new ArrayList<String>();
-                                for (int i = 0; i < results.size(); i++) {
-                                    numbersList.add(results.get(i).getPhoneNumbers().get(0).getNumber());
-                                }
-                                String[] numbers = numbersList.toArray(new String[0]);
-                                long flexTime = calculateFlex(hr, min, sec, day, mon, years);
-
-                                Data messageData = new Data.Builder()
-
-                                        .putString("message", messageInput.getText().toString())
-                                        .putStringArray("contacts", numbers)
-                                        .putString("Everytime", everytime.getText().toString())
-                                        .putString("ending", endafter.getText().toString())
-                                        .putString("dropitem", spin1.getSelectedItem().toString())
-                                        .putString("dropitem2", spin2.getSelectedItem().toString())
-                                        .build();
-
-
-                                OneTimeWorkRequest sendMessages = new OneTimeWorkRequest.Builder(Smsonetimeworker.class)
-                                        .setInitialDelay(flexTime, TimeUnit.MILLISECONDS)
-                                        .setInputData(messageData).build();
-
-
-                                WorkManager.getInstance(getApplicationContext()).enqueue(sendMessages);
-                                Toast.makeText(SMSScheduler.this, "Message is scheduled", Toast.LENGTH_SHORT).show();
-
-
-                            } else {
-                                Toast.makeText(SMSScheduler.this, "Please add message", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(SMSScheduler.this, "Select Contact Number", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(SMSScheduler.this, "Please select Date", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(SMSScheduler.this, "Please select Time", Toast.LENGTH_SHORT).show();
-
-                }
 
             }
 
@@ -340,5 +299,64 @@ public class SMSScheduler extends AppCompatActivity {
         return delta;
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater=getMenuInflater();
+            inflater.inflate(R.menu.popup,menu);
 
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (hr != 100 && min != 100) {
+            if (day != 30 && mon != 12 && years != 1) {
+
+                if (!results.isEmpty()) {
+                    if (!messageInput.getText().toString().isEmpty()) {
+                        List<String> numbersList = new ArrayList<String>();
+                        for (int i = 0; i < results.size(); i++) {
+                            numbersList.add(results.get(i).getPhoneNumbers().get(0).getNumber());
+                        }
+                        String[] numbers = numbersList.toArray(new String[0]);
+                        long flexTime = calculateFlex(hr, min, sec, day, mon, years);
+
+                        Data messageData = new Data.Builder()
+
+                                .putString("message", messageInput.getText().toString())
+                                .putStringArray("contacts", numbers)
+                                .putString("Everytime", everytime.getText().toString())
+                                .putString("ending", endafter.getText().toString())
+                                .putString("dropitem", spin1.getSelectedItem().toString())
+                                .putString("dropitem2", spin2.getSelectedItem().toString())
+                                .build();
+
+
+                        OneTimeWorkRequest sendMessages = new OneTimeWorkRequest.Builder(Smsonetimeworker.class)
+                                .setInitialDelay(flexTime, TimeUnit.MILLISECONDS)
+                                .setInputData(messageData).build();
+
+
+                        WorkManager.getInstance(getApplicationContext()).enqueue(sendMessages);
+                        Toast.makeText(SMSScheduler.this, "Message is scheduled", Toast.LENGTH_SHORT).show();
+
+
+                    } else {
+                        Toast.makeText(SMSScheduler.this, "Please add message", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(SMSScheduler.this, "Select Contact Number", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(SMSScheduler.this, "Please select Date", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(SMSScheduler.this, "Please select Time", Toast.LENGTH_SHORT).show();
+
+        }
+
+        return true;
+    }
 }

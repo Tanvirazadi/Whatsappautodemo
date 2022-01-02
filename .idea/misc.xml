@@ -11,25 +11,25 @@
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-hdpi/activity_loginpage.xml" value="0.536" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-hdpi/activity_signinpage.xml" value="0.36171875" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-hdpi/activity_signuppage.xml" value="0.36171875" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout-hdpi/activity_smsscheduler.xml" value="0.20761245674740483" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout-hdpi/activity_smsscheduler.xml" value="0.536" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-hdpi/activity_whatsapp_scheduler.xml" value="0.36171875" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-v26/content.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxhdpi/activity_loginpage.xml" value="0.2" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxhdpi/activity_signinpage.xml" value="0.36171875" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxhdpi/activity_signuppage.xml" value="0.264" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxhdpi/activity_smsscheduler.xml" value="0.36171875" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxhdpi/activity_smsscheduler.xml" value="0.264" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxhdpi/activity_whatsapp_scheduler.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_loginpage.xml" value="0.16799999999999998" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_signinpage.xml" value="0.36171875" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_signuppage.xml" value="0.36171875" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_smsscheduler.xml" value="0.536" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_smsscheduler.xml" value="0.2" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_whatsapp_scheduler.xml" value="0.180859375" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_home.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_loginpage.xml" value="0.4" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_signinpage.xml" value="0.36171875" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_signuppage.xml" value="0.4" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_smsscheduler.xml" value="0.60625" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_smsscheduler.xml" value="0.264" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_splash.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_tabactivity.xml" value="0.19786324786324785" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_whatsapp_scheduler.xml" value="0.4" />
@@ -38,11 +38,12 @@
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/content.xml" value="0.2" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_deleted.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_failed.xml" value="0.24114583333333334" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_pending.xml" value="0.1" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_pending.xml" value="0.4" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_sent.xml" value="0.264" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/header.xml" value="0.2" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/item_contact.xml" value="0.19786324786324785" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout/sms_layout.xml" value="0.536" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/sms_layout.xml" value="0.264" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/menu-v26/popup.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/menu/mainmenu.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/menu/popup.xml" value="0.19786324786324785" />
         <entry key="..\:/whatsappdemo/app/src/main/res/xml/whatsappservice.xml" value="0.24114583333333334" />
