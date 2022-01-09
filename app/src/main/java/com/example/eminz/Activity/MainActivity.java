@@ -21,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.eminz.Scheduler.SMSScheduler;
 import com.example.eminz.Scheduler.WhatsappScheduler;
 import com.example.eminz.Scheduler.WhatsappbsnsScheduler;
+import com.example.eminz.Sqlite.Databsehelper;
 import com.example.eminz.fragment.Fragmentadapter;
 import com.example.whatsappdemo.R;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     TextView text;
     Fragmentadapter fragmentadapter;
     FloatingActionButton button1, button2, button3;
+    Databsehelper databsehelper;
 
 
     @Override
@@ -199,4 +201,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void onLabelClick(View view) {
+        if (view.getId() == R.id.accountid) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                  
+                }
+            });
+
+        }
+    }
 }

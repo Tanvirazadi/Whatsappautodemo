@@ -28,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 public class Onetimeworker extends Worker {
 
 
-
     public Onetimeworker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -70,7 +69,7 @@ public class Onetimeworker extends Worker {
 
 
             } else {
-                Log.d("onetimewhatsapp", "Condition not satisfied");
+
             }
             if (numbers.length != 0) {
                 Log.d("onetimewhatsapp", "inside of 2nd if");
@@ -103,8 +102,6 @@ public class Onetimeworker extends Worker {
                         } else {
                             Log.d("onetimewhatsapp", "inside resolver else");
 
-//                            Failed
-
 
                             AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
                             ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
@@ -119,7 +116,7 @@ public class Onetimeworker extends Worker {
 
                         }
                     } catch (Exception e) {
-                        Log.d("onetimewhatsapp", "Exception " + e.getMessage());
+
                         e.printStackTrace();
 
 
@@ -133,7 +130,7 @@ public class Onetimeworker extends Worker {
                                 scheduleDao.update(Failed);
                             }
                         });
-//                        Failed
+
                     }
 
                 }
@@ -141,7 +138,16 @@ public class Onetimeworker extends Worker {
 
 
         } catch (Exception e) {
-            Log.d("onetimesms", "Exception2 " + e.getMessage());
+            AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+            ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+            AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                @Override
+                public void run() {
+                    Schedule Failed = scheduleDao.findById(scheduleId);
+                    Failed.status = "Failed";
+                    scheduleDao.update(Failed);
+                }
+            });
             e.printStackTrace();
         }
 

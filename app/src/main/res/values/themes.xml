@@ -19,7 +19,7 @@
         <item name="android:textColor">?android:attr/textColorPrimaryInverse</item>
     </style>
 
-    <style name="mystyle" parent="Theme.MaterialComponents.Light.Bridge"></style>
+    <style name="mystyle" parent="Theme.MaterialComponents.Light.Bridge" />
 
     <style name="Theme_Light_Base" parent="@style/ContactPicker_Theme_Light">
         <!-- ActionBarCompat -->

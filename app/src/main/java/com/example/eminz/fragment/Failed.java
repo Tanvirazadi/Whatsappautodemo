@@ -66,4 +66,10 @@ public class Failed extends Fragment {
         loaddata();
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loaddata();
+    }
 }

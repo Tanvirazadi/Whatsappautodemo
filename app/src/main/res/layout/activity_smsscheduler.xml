@@ -110,12 +110,14 @@
         android:id="@+id/edit12"
         android:layout_width="221dp"
         android:layout_height="91dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginBottom="232dp"
         android:inputType="number"
         android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteY="71dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spinner2"

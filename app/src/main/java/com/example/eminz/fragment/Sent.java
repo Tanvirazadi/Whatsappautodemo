@@ -70,4 +70,10 @@ public class Sent extends Fragment {
         loaddata();
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loaddata();
+    }
 }

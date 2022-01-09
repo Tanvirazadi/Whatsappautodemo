@@ -1,6 +1,8 @@
 package com.example.eminz.database;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.eminz.Activity.LastActivity;
 import com.example.eminz.database.entities.Schedule;
 import com.example.whatsappdemo.R;
 
@@ -39,7 +42,7 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.ViewHolder> {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onBindViewHolder(@NonNull SmsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SmsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.name.setText(this.scheduleList.get(position).recipients);
         Date date = new Date(scheduleList.get(position).date);
@@ -47,15 +50,30 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.ViewHolder> {
         holder.message.setText(this.scheduleList.get(position).body);
         Time time = new Time(scheduleList.get(position).time);
         holder.time.setText(time.toString());
-        
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, LastActivity.class);
+                intent.putExtra("message", scheduleList.get(position).body);
+                intent.putExtra("date", scheduleList.get(position).date);
+                intent.putExtra("time", scheduleList.get(position).time);
+                intent.putExtra("name", scheduleList.get(position).recipients);
+                context.startActivity(intent);
+            }
+        });
+
+
     }
+
     @Override
     public int getItemCount() {
         return scheduleList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name,date,time,message;
+        TextView name, date, time, message;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

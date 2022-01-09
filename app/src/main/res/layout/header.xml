@@ -4,17 +4,18 @@
     android:layout_width="match_parent"
     android:id="@+id/headerview"
     android:layout_height="150dp"
-    android:background="#F2D8E4"
+    android:background="#00B8D4"
     android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
 
     <TextView
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="16dp"
         android:id="@+id/accountid"
         android:layout_width="133dp"
         android:layout_height="28dp"
+        android:onClick="onLabelClick"
         android:clickable="true"
         android:text="Guest account"
         android:textColor="#415701"
@@ -23,5 +24,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.696" />
+        app:layout_constraintVertical_bias="0.672" />
 </androidx.constraintlayout.widget.ConstraintLayout>

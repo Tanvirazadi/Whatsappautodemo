@@ -93,7 +93,16 @@ public class Smsonetimeworker extends Worker {
 
             }
         } catch (Exception e) {
-            Log.d("onetimesms", "Exception " + e.getMessage());
+            AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+            ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+            AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                @Override
+                public void run() {
+                    Schedule Failed = scheduleDao.findById(scheduleId);
+                    Failed.status = "Failed";
+                    scheduleDao.update(Failed);
+                }
+            });
             e.printStackTrace();
         }
 
@@ -158,6 +167,7 @@ public class Smsonetimeworker extends Worker {
 
                     case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
 
+
                         Toast.makeText(getApplicationContext(), "Generic failure",
                                 Toast.LENGTH_SHORT).show();
                         break;
@@ -205,11 +215,10 @@ public class Smsonetimeworker extends Worker {
             }
         }, new IntentFilter(DELIVERED));
 
-        Log.d("onetimesms", "inside sendSms");
+
         SmsManager sms = SmsManager.getDefault();
-        Log.d("onetimesms", "text " + message);
         sms.sendTextMessage(phoneNumber, null, message, sentPI, deliveredPI);
-        Log.d("onetimesms", "sendsms done");
+
     }
 
 

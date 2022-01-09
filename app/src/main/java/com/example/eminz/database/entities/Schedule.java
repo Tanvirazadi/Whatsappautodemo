@@ -3,6 +3,9 @@ package com.example.eminz.database.entities;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.eminz.database.Dateconverter;
 
 @Entity
 public class Schedule {
@@ -17,7 +20,7 @@ public class Schedule {
 
     @ColumnInfo(name = "body")
     public String body;
-
+    @TypeConverters(Dateconverter.class)
     @ColumnInfo(name = "schedule_at")
     public long date;
     @ColumnInfo(name = "time")
