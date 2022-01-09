@@ -19,6 +19,12 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.example.eminz.database.AppDatabase;
+import com.example.eminz.database.AppExecutors;
+import com.example.eminz.database.DatabaseClient;
+import com.example.eminz.database.daos.ScheduleDao;
+import com.example.eminz.database.entities.Schedule;
+
 import java.util.concurrent.TimeUnit;
 
 public class Smsonetimeworker extends Worker {
@@ -38,7 +44,7 @@ public class Smsonetimeworker extends Worker {
         String[] numbers = getInputData().getStringArray("contacts");
         String dropitem = getInputData().getString("dropitem");
         String dropitem2 = getInputData().getString("dropitem2");
-
+        long scheduleId = getInputData().getLong("smsschdeuleId", -1);
 
         Log.d("onetimesms", "periodic schedule");
         try {
@@ -69,7 +75,19 @@ public class Smsonetimeworker extends Worker {
                 for (int j = 0; j < numbers.length; j++) {
                     Log.d("onetimesms", "inside for " + message);
 
+
                     sendSMS(numbers[j], message);
+
+                    AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+                    ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+                    AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            Schedule Sent = scheduleDao.findById(scheduleId);
+                            Sent.status = "Sent";
+                            scheduleDao.update(Sent);
+                        }
+                    });
                 }
 
 
@@ -133,7 +151,8 @@ public class Smsonetimeworker extends Worker {
 
                     case Activity.RESULT_OK:
 
-                        Toast.makeText(getApplicationContext(), "SMS sent",
+
+                        Toast.makeText(getApplicationContext(), "SMS sent Successfully",
                                 Toast.LENGTH_SHORT).show();
                         break;
 

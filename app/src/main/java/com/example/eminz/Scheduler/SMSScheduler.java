@@ -3,7 +3,6 @@ package com.example.eminz.Scheduler;
 import static android.Manifest.permission.READ_CONTACTS;
 import static android.Manifest.permission.SEND_SMS;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +10,7 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,10 +28,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.example.eminz.database.AppDatabase;
+import com.example.eminz.database.AppExecutors;
+import com.example.eminz.database.DatabaseClient;
+import com.example.eminz.database.daos.ScheduleDao;
+import com.example.eminz.database.entities.Schedule;
 import com.example.eminz.worker.Smsonetimeworker;
 import com.example.whatsappdemo.R;
 import com.karumi.dexter.Dexter;
@@ -39,6 +46,8 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.onegravity.contactpicker.contact.Contact;
+import com.onegravity.contactpicker.group.Group;
 import com.wafflecopter.multicontactpicker.ContactResult;
 import com.wafflecopter.multicontactpicker.LimitColumn;
 import com.wafflecopter.multicontactpicker.MultiContactPicker;
@@ -46,6 +55,7 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -53,14 +63,21 @@ import java.util.concurrent.TimeUnit;
 
 public class SMSScheduler extends AppCompatActivity {
     private static final int CONTACT_PICKER_REQUEST = 20;
+    private static final String EXTRA_DARK_THEME = "EXTRA_DARK_THEME";
+    private static final String EXTRA_GROUPS = "EXTRA_GROUPS";
+    private static final String EXTRA_CONTACTS = "EXTRA_CONTACTS";
+    private static final int REQUEST_CONTACT = 0;
     private final BroadcastReceiver localBroadCastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String result = intent.getStringExtra("Result");
             Toast.makeText(context, "result", Toast.LENGTH_SHORT).show();
 
+
         }
     };
+    int day = 31;
+
     public TextView date;
     Spinner spin1, spin2;
     ImageButton contactButton;
@@ -72,14 +89,73 @@ public class SMSScheduler extends AppCompatActivity {
     String drop_item;
     Context context;
     List<ContactResult> results = new ArrayList<>();
-    int day=31;
-    int mon=11;
-    int years=1;
+    int mon = 11;
+    int years = 1;
+    private List<Contact> mContacts;
     private TextView time, battery, screen;
     private EditText messageInput, numberInput, nameInput;
     private int hr = 100;
     private int min = 100;
     private int sec = 100;
+    private List<Group> mGroups;
+
+    private void updateMessageEditText(String selectedMessage) {
+        messageInput.setText(selectedMessage);
+        Toast.makeText(getApplicationContext(), "Please select new date and time.", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void updateEnterPhoneNumberEditText(String selectedName) {
+        nameInput.setText(selectedName);
+
+
+    }
+
+    private boolean AirplaneModeOn(Context applicationContext) {
+        return Settings.Global.getInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CONTACT_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                results = MultiContactPicker.obtainResult(data);
+                StringBuilder names = new StringBuilder(results.get(0).getDisplayName());
+                for (int j = 0; j < results.size(); j++) {
+                    if (j != 0)
+                        names.append(",").append(results.get(j).getDisplayName());
+                }
+                phn.setText(names);
+
+                Log.d("MyTag", results.get(0).getDisplayName());
+            } else if (resultCode == RESULT_CANCELED) {
+                System.out.println("User closed the picker without selecting items.");
+            }
+        }
+    }
+
+    private long calculateFlex(int hourOfTheDay, int minute, int sec, int day, int mon, int years) {
+
+
+        // Initialize the calendar with today and the preferred time to run the job.
+        Calendar cal1 = Calendar.getInstance();
+        cal1.set(Calendar.HOUR_OF_DAY, hourOfTheDay);
+        cal1.set(Calendar.MINUTE, minute);
+        cal1.set(Calendar.SECOND, sec);
+        cal1.set(Calendar.DAY_OF_MONTH, day);
+        cal1.set(Calendar.MONTH, mon);
+        cal1.set(Calendar.YEAR, years);
+
+        // Initialize a calendar with now.
+        Calendar cal3 = Calendar.getInstance();
+
+
+        long delta = Math.abs((cal3.getTimeInMillis() - cal1.getTimeInMillis()));
+
+        return delta;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +255,7 @@ public class SMSScheduler extends AppCompatActivity {
                 years = calendar.get(Calendar.YEAR);
                 mon = calendar.get(Calendar.MONTH);
                 day = calendar.get(Calendar.DAY_OF_MONTH);
+
                 DatePickerDialog dpd = DatePickerDialog.newInstance(
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
@@ -186,28 +263,20 @@ public class SMSScheduler extends AppCompatActivity {
                                 years = yea;
                                 mon = monthOfYear;
                                 day = dayOfMonth;
-                                date.setText(new StringBuilder().append(dayOfMonth).append("-").append(monthOfYear + 1).append("-").append(yea).toString());
+                                SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+                                String dateString = format.format(calendar.getTime());
+                                date.setText(dateString);
 
 
                             }
 
 
-                        }
-                );
+                        },
+                        years, mon, day);
                 dpd.show(getSupportFragmentManager(), "Datepickerdialog");
 
 
             }
-
-        });
-        sms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-            }
-
 
         });
 
@@ -224,7 +293,7 @@ public class SMSScheduler extends AppCompatActivity {
                         .bubbleColor(ContextCompat.getColor(SMSScheduler.this, R.color.purple_700)) //Optional - default: Azure Blue
                         .bubbleTextColor(Color.WHITE) //Optional - default: White
                         .setTitleText("Select Contacts") //Optional - default: Select Contacts
-                        .setLoadingType(MultiContactPicker.LOAD_ASYNC) //Optional - default LOAD_ASYNC (wait till all loaded vs stream results)
+                        .setLoadingType(MultiContactPicker.LOAD_SYNC) //Optional - default LOAD_ASYNC (wait till all loaded vs stream results)
                         .limitToColumn(LimitColumn.NONE) //Optional - default NONE (Include phone + email, limiting to one can improve loading time)
                         .setActivityAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
                                 android.R.anim.fade_in,
@@ -241,69 +310,10 @@ public class SMSScheduler extends AppCompatActivity {
 
     }
 
-    private void updateMessageEditText(String selectedMessage) {
-        messageInput.setText(selectedMessage);
-        Toast.makeText(getApplicationContext(), "Please select new date and time.", Toast.LENGTH_SHORT).show();
-
-    }
-
-    private void updateEnterPhoneNumberEditText(String selectedName) {
-        nameInput.setText(selectedName);
-
-
-    }
-
-    private boolean AirplaneModeOn(Context applicationContext) {
-        return Settings.Global.getInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CONTACT_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                results = MultiContactPicker.obtainResult(data);
-                StringBuilder names = new StringBuilder(results.get(0).getDisplayName());
-                for (int j = 0; j < results.size(); j++) {
-                    if (j != 0)
-                        names.append(",").append(results.get(j).getDisplayName());
-                }
-                phn.setText(names);
-
-                Log.d("MyTag", results.get(0).getDisplayName());
-            } else if (resultCode == RESULT_CANCELED) {
-                System.out.println("User closed the picker without selecting items.");
-            }
-        }
-    }
-
-    private long calculateFlex(int hourOfTheDay, int minute, int sec, int day, int mon, int years) {
-
-
-        // Initialize the calendar with today and the preferred time to run the job.
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(Calendar.HOUR_OF_DAY, hourOfTheDay);
-        cal1.set(Calendar.MINUTE, minute);
-        cal1.set(Calendar.SECOND, sec);
-        cal1.set(Calendar.DAY_OF_MONTH, day);
-        cal1.set(Calendar.MONTH, mon);
-        cal1.set(Calendar.YEAR, years);
-
-        // Initialize a calendar with now.
-        Calendar cal3 = Calendar.getInstance();
-
-
-        long delta = Math.abs((cal3.getTimeInMillis() - cal1.getTimeInMillis()));
-
-        return delta;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater=getMenuInflater();
-            inflater.inflate(R.menu.popup,menu);
-
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.popup, menu);
 
 
         return true;
@@ -313,7 +323,6 @@ public class SMSScheduler extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (hr != 100 && min != 100) {
             if (day != 30 && mon != 12 && years != 1) {
-
                 if (!results.isEmpty()) {
                     if (!messageInput.getText().toString().isEmpty()) {
                         List<String> numbersList = new ArrayList<String>();
@@ -322,17 +331,36 @@ public class SMSScheduler extends AppCompatActivity {
                         }
                         String[] numbers = numbersList.toArray(new String[0]);
                         long flexTime = calculateFlex(hr, min, sec, day, mon, years);
+                        String message = messageInput.getText().toString();
+                        final String every = everytime.getText().toString();
+                        final String endAfter = endafter.getText().toString();
+                        String drop1 = spin1.getSelectedItem().toString();
+                        String drop2 = spin2.getSelectedItem().toString();
+                        int everyInt = 0, repeatCount = 0;
+                        try {
+                            everyInt = Integer.parseInt(every);
+                            repeatCount = Integer.parseInt(endAfter);
+                        } catch (Exception ignored) {
 
+                        }
+                        long scheduleId = System.currentTimeMillis();
                         Data messageData = new Data.Builder()
 
-                                .putString("message", messageInput.getText().toString())
+                                .putString("message", message)
                                 .putStringArray("contacts", numbers)
-                                .putString("Everytime", everytime.getText().toString())
-                                .putString("ending", endafter.getText().toString())
-                                .putString("dropitem", spin1.getSelectedItem().toString())
-                                .putString("dropitem2", spin2.getSelectedItem().toString())
+                                .putString("Everytime", every)
+                                .putString("ending", endAfter)
+                                .putString("dropitem", drop1)
+                                .putString("dropitem2", drop2)
+                                .putLong("smsschdeuleId", scheduleId)
                                 .build();
 
+                        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED)
+                                .build();
+
+
+                        Schedule schedule = new Schedule(scheduleId, "SMS", TextUtils.join(",", numbers), message, flexTime, flexTime,
+                                everyInt, drop1, repeatCount, repeatCount, "Pending");
 
                         OneTimeWorkRequest sendMessages = new OneTimeWorkRequest.Builder(Smsonetimeworker.class)
                                 .setInitialDelay(flexTime, TimeUnit.MILLISECONDS)
@@ -340,6 +368,18 @@ public class SMSScheduler extends AppCompatActivity {
 
 
                         WorkManager.getInstance(getApplicationContext()).enqueue(sendMessages);
+                        AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+                        ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+
+                        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                List<Long> insert = scheduleDao.insert(schedule);
+                                finish();
+
+
+                            }
+                        });
                         Toast.makeText(SMSScheduler.this, "Message is scheduled", Toast.LENGTH_SHORT).show();
 
 
@@ -356,6 +396,7 @@ public class SMSScheduler extends AppCompatActivity {
             Toast.makeText(SMSScheduler.this, "Please select Time", Toast.LENGTH_SHORT).show();
 
         }
+
 
         return true;
     }

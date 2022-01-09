@@ -6,13 +6,9 @@
     tools:context="com.example.eminz.fragment.Failed">
 
 
-
-    <TextView
-        android:textSize="60sp"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerfailed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello Failure" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

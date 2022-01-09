@@ -1,36 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/todo_row_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="250dp"
 
-    <TextView
-        android:id="@+id/display_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    >
 
-    <TextView
-        android:id="@+id/display_messageDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message Date"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cards"
+        android:layout_width="412dp"
+        android:layout_height="223dp"
+        android:elevation="5dp"
+        android:paddingTop="8dp"
+        app:cardElevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/display_messageTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Message Time"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-    <TextView
-        android:id="@+id/display_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="message"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/display_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Contacts"
+                android:minHeight="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/display_messageDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/teal_700"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/display_name" />
+
+            <TextView
+                android:id="@+id/display_messageTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:text="Textview"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/display_messageDate" />
+
+            <TextView
+                android:id="@+id/display_message"
+                android:layout_width="407dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="12dp"
+                android:paddingStart="10dp"
+                android:text="textview"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/display_messageTime" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

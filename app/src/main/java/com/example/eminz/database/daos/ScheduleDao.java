@@ -8,7 +8,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.eminz.database.entities.Schedule;
-import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;
 
@@ -18,13 +17,16 @@ public interface ScheduleDao {
     List<Schedule> getAll();
 
     @Query("SELECT * FROM schedule WHERE scheduleId IN (:scheduleIds)")
-    List<Schedule> loadAllByIds(int... scheduleIds);
+    List<Schedule> loadAllByIds(long[] scheduleIds);
 
     @Query("SELECT * FROM schedule WHERE type = :type")
     List<Schedule> findByType(String type);
 
     @Query("SELECT * FROM schedule WHERE status = :status")
     List<Schedule> findByStatus(String status);
+
+    @Query("SELECT * FROM schedule WHERE scheduleId = :id")
+    Schedule findById(long id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     List<Long> insert(Schedule... data);

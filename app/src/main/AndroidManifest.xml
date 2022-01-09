@@ -30,12 +30,22 @@
             android:name="com.example.eminz.Scheduler.WhatsappScheduler"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/mystyle"/>
+            android:theme="@style/mystyle" />
         <activity
             android:name="com.example.eminz.Scheduler.SMSScheduler"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/mystyle"/>
+            android:theme="@style/mystyle" />
+        <activity
+            android:name="com.onegravity.contactpicker.core.ContactPickerActivity"
+            android:enabled="true"
+            android:exported="false">
+
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.example.eminz.Activity.Signinpage"
             android:exported="true"

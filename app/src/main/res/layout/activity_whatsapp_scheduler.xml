@@ -7,20 +7,16 @@
     tools:context="com.example.eminz.Scheduler.WhatsappScheduler">
 
 
-    <EditText
-        android:id="@+id/phone"
-        android:layout_width="wrap_content"
+    <com.android.ex.chips.RecipientEditTextView
+        android:id="@+id/phone_retrvs"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/enter_number"
-        android:inputType="phone"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.016"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034" />
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="116dp"
+        android:hint="Contacts"
+        android:minHeight="58dp"
+        app:layout_constraintEnd_toStartOf="@+id/chooses"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txt"
@@ -33,24 +29,24 @@
         android:paddingStart="4dp"
         app:barrierMargin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/phone"
+        app:layout_constraintEnd_toEndOf="@+id/phone_retrvs"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/phone"
-        app:layout_constraintTop_toBottomOf="@+id/phone"
+        app:layout_constraintStart_toStartOf="@+id/phone_retrvs"
+        app:layout_constraintTop_toBottomOf="@+id/phone_retrvs"
         app:layout_constraintVertical_bias="0.051"
         tools:ignore="RtlSymmetry" />
 
     <ImageButton
-        android:id="@+id/choose"
-        android:layout_width="110dp"
-        android:layout_height="83dp"
+        android:id="@+id/chooses"
+        android:layout_width="70dp"
+        android:layout_height="57dp"
         android:src="@drawable/ic_baseline_group_24"
         android:text="@string/contacts"
-        app:layout_constraintBottom_toBottomOf="@+id/phone"
+        app:layout_constraintBottom_toBottomOf="@+id/phone_retrvs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="@+id/phone"
-        app:layout_constraintTop_toTopOf="@+id/phone"
+        app:layout_constraintStart_toStartOf="@+id/phone_retrvs"
+        app:layout_constraintTop_toTopOf="@+id/phone_retrvs"
         app:layout_constraintVertical_bias="0.228"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -164,16 +160,18 @@
         app:layout_constraintStart_toEndOf="@+id/whatsappdate"
         app:layout_constraintTop_toBottomOf="@+id/txt" />
 
-    <Button
-        android:id="@+id/whatsapschedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="84dp"
-        android:text="schedule"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/secondview"
+        android:layout_width="390dp"
+        android:layout_height="307dp"
+        android:background="#CDC2C2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit12" />
+        app:layout_constraintTop_toBottomOf="@+id/whatsappdate">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

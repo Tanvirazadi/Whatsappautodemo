@@ -7,6 +7,7 @@
         <entry key="..\:/whatsappdemo/app/src/main/res/drawable/ic_baseline_cloud_done_24.xml" value="0.20185185185185187" />
         <entry key="..\:/whatsappdemo/app/src/main/res/drawable/round.xml" value="0.20185185185185187" />
         <entry key="..\:/whatsappdemo/app/src/main/res/drawable/style1.xml" value="0.1259259259259259" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/drawable/style3.xml" value="0.1" />
         <entry key="..\:/whatsappdemo/app/src/main/res/font/message.xml" value="0.1259259259259259" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-hdpi/activity_loginpage.xml" value="0.536" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-hdpi/activity_signinpage.xml" value="0.36171875" />
@@ -23,7 +24,7 @@
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_signinpage.xml" value="0.36171875" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_signuppage.xml" value="0.36171875" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_smsscheduler.xml" value="0.2" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_whatsapp_scheduler.xml" value="0.180859375" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout-xxxhdpi/activity_whatsapp_scheduler.xml" value="0.176" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_home.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_loginpage.xml" value="0.4" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_main.xml" value="0.2" />
@@ -32,9 +33,10 @@
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_smsscheduler.xml" value="0.264" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_splash.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_tabactivity.xml" value="0.19786324786324785" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_whatsapp_scheduler.xml" value="0.4" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_whatsapp_scheduler.xml" value="0.264" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/activity_whatsappbsns_scheduler.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/card.xml" value="0.1" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/contacts.xml" value="0.536" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/content.xml" value="0.2" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_deleted.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_failed.xml" value="0.24114583333333334" />
@@ -42,10 +44,13 @@
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/fragment_sent.xml" value="0.264" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/header.xml" value="0.2" />
         <entry key="..\:/whatsappdemo/app/src/main/res/layout/item_contact.xml" value="0.19786324786324785" />
-        <entry key="..\:/whatsappdemo/app/src/main/res/layout/sms_layout.xml" value="0.264" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/sms_layout.xml" value="0.152" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/layout/test.xml" value="0.2" />
         <entry key="..\:/whatsappdemo/app/src/main/res/menu-v26/popup.xml" value="0.24114583333333334" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/menu/contact_picker.xml" value="0.5190582959641256" />
         <entry key="..\:/whatsappdemo/app/src/main/res/menu/mainmenu.xml" value="0.24114583333333334" />
         <entry key="..\:/whatsappdemo/app/src/main/res/menu/popup.xml" value="0.19786324786324785" />
+        <entry key="..\:/whatsappdemo/app/src/main/res/menu/whatsappmenu.xml" value="0.5190582959641256" />
         <entry key="..\:/whatsappdemo/app/src/main/res/xml/whatsappservice.xml" value="0.24114583333333334" />
       </map>
     </option>

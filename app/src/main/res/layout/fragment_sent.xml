@@ -6,19 +6,10 @@
     android:paddingLeft="8dp"
     android:paddingRight="8dp">
 
-    <TextView
-        android:id="@+id/deleteSmsLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:text="Press and hold to delete an SMS" />
 
-    <ListView
-        android:id="@+id/list_sms"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclersent"
         android:layout_width="match_parent"
-        android:layout_height="435dp"
-        android:layout_weight="1"
-        android:drawSelectorOnTop="false" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

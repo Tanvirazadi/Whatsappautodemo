@@ -6,28 +6,36 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.android.ex.chips.BaseRecipientAdapter;
+import com.android.ex.chips.RecipientEditTextView;
+import com.android.ex.chips.recipientchip.DrawableRecipientChip;
 import com.example.eminz.Service.Whatsappaccessibility;
 import com.example.eminz.database.AppDatabase;
 import com.example.eminz.database.AppExecutors;
@@ -42,12 +50,11 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.wafflecopter.multicontactpicker.ContactResult;
-import com.wafflecopter.multicontactpicker.LimitColumn;
-import com.wafflecopter.multicontactpicker.MultiContactPicker;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -56,29 +63,62 @@ import java.util.concurrent.TimeUnit;
 public class WhatsappScheduler extends AppCompatActivity {
 
     private static final int CONTACT_PICKER_REQUEST = 20;
-    int days = 1;
+
 
     String repeatTime;
     String stayTime;
     String drop_item2;
     String drop_item;
-    EditText phn, sms, everytime, endafter;
-    Button whtsapp;
-    ImageButton chose;
+    EditText sms, everytime, endafter;
     Spinner spin1, spin2;
     ArrayList<ContactResult> results = new ArrayList<>();
     TextView time, date;
-    int day;
-    int mon;
-    int years;
+    int day = 30;
+    int mon = 12;
+    int years = 1;
     private int hr = 100;
     private int min = 100;
     private int sec = 100;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whatsapp_scheduler);
+
+
+        final RecipientEditTextView phoneRetv = (RecipientEditTextView) findViewById(R.id.phone_retrvs);
+        phoneRetv.setMaxChips(4);
+        phoneRetv.setChipNotCreatedListener(new RecipientEditTextView.ChipNotCreatedListener() {
+            @Override
+            public void chipNotCreated(String chipText) {
+                Toast.makeText(WhatsappScheduler.this, "You set the max number of chips to 20. Chip not created for: " + chipText, Toast.LENGTH_SHORT).show();
+            }
+        });
+        phoneRetv.setTokenizer(new MultiAutoCompleteTextView.CommaTokenizer());
+        BaseRecipientAdapter adapter = new BaseRecipientAdapter(BaseRecipientAdapter.QUERY_TYPE_PHONE, this);
+        adapter.setShowMobileOnly(true);
+        phoneRetv.setAdapter(adapter);
+        phoneRetv.dismissDropDownOnItemSelected(true);
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                DrawableRecipientChip[] chips = phoneRetv.getSortedRecipients();
+                for (DrawableRecipientChip chip : chips) {
+                    Log.v("DrawableChip", chip.getEntry().getDisplayName() + " " + chip.getEntry().getDestination());
+                }
+            }
+        }, 5000);
+
+        final ImageButton showAll = (ImageButton) findViewById(R.id.chooses);
+        showAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                phoneRetv.showAllContacts();
+            }
+        });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setMessage(R.string.enter_messeage)
                 .setTitle("Rminz")
@@ -102,10 +142,7 @@ public class WhatsappScheduler extends AppCompatActivity {
         builder.create().show();
 
 
-        phn = findViewById(R.id.phone);
         sms = findViewById(R.id.txt);
-        chose = findViewById(R.id.choose);
-        whtsapp = findViewById(R.id.whatsapschedule);
         time = findViewById(R.id.time);
         date = findViewById(R.id.whatsappdate);
         spin1 = findViewById(R.id.spinner21);
@@ -116,9 +153,9 @@ public class WhatsappScheduler extends AppCompatActivity {
         repeatTime = everytime.getText().toString();
 
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.time, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin1.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.time, android.R.layout.simple_spinner_item);
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin1.setAdapter(adapter1);
 
         endafter = findViewById(R.id.edit12);
         stayTime = endafter.getText().toString();
@@ -143,19 +180,6 @@ public class WhatsappScheduler extends AppCompatActivity {
             @Override
             public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
         }).check();
-
-
-        chose.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-
-                opencontact();
-            }
-
-
-        });
 
 
         time.setOnClickListener(new View.OnClickListener() {
@@ -195,98 +219,16 @@ public class WhatsappScheduler extends AppCompatActivity {
                                 mon = monthOfYear;
                                 day = dayOfMonth;
                                 date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + yea);
+                                SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
+                                String dateString = format.format(calendar.getTime());
+                                date.setText(dateString);
 
                             }
                         }
                 );
                 dpd.show(getSupportFragmentManager(), "Datepickerdialog");
-            }
-        });
-
-
-        whtsapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (hr != 100 && min != 100) {
-                    if (day != 31 && mon != 12 && years != 1) {
-
-                        if (!results.isEmpty()) {
-                            if (!sms.getText().toString().isEmpty()) {
-                                List<String> numbersList = new ArrayList<String>();
-                                for (int i = 0; i < results.size(); i++) {
-                                    numbersList.add(results.get(i).getPhoneNumbers().get(0).getNumber());
-                                }
-                                String[] numbers = numbersList.toArray(new String[0]);
-                                long flexTime = calculateFlex(hr, min, sec, day, mon, years);
-                                Log.d("flex", flexTime + "");
-                                Log.d("spin1", spin1.getSelectedItem().toString() + "" + " spin2 " + spin2.getSelectedItem().toString() + "");
-
-
-                                String message = sms.getText().toString();
-                                final String every = everytime.getText().toString();
-                                final String endAfter = endafter.getText().toString();
-                                String drop1 = spin1.getSelectedItem().toString();
-                                String drop2 = spin2.getSelectedItem().toString();
-                                int everyInt = 0, repeatCount = 0;
-                                try{
-                                    everyInt = Integer.parseInt(every);
-                                    repeatCount = Integer.parseInt(endAfter);
-                                } catch (Exception ignored){
-
-                                }
-
-
-                                Data messageData = new Data.Builder()
-
-                                        .putString("message", message)
-                                        .putStringArray("contacts", numbers)
-                                        .putString("Everytime", every)
-                                        .putString("ending", endAfter)
-                                        .putString("dropitem", drop1)
-                                        .putString("dropitem2", drop2)
-                                        .build();
-
-                                Schedule schedule = new Schedule("WhatsApp",TextUtils.join(",",numbers),message,flexTime,
-                                        everyInt,drop1,repeatCount,repeatCount,"Pending");
-
-                                AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
-                                ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
-
-                                AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        scheduleDao.insert(schedule);
-                                    }
-                                });
-
-                                OneTimeWorkRequest sendMessagework = new OneTimeWorkRequest.Builder(Onetimeworker.class)
-                                        .setInitialDelay(flexTime, TimeUnit.MILLISECONDS)
-                                        .setInputData(messageData)
-                                        .build();
-
-                                WorkManager.getInstance().enqueue(sendMessagework);
-                                Toast.makeText(WhatsappScheduler.this, "Message is scheduled", Toast.LENGTH_SHORT).show();
-
-
-                            } else {
-                                Toast.makeText(WhatsappScheduler.this, "Please add message", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(WhatsappScheduler.this, "Select Contact Number", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        Toast.makeText(WhatsappScheduler.this, "Please select Date", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(WhatsappScheduler.this, "Please select Time", Toast.LENGTH_SHORT).show();
-
-                }
-
 
             }
-
-
         });
 
 
@@ -302,25 +244,6 @@ public class WhatsappScheduler extends AppCompatActivity {
 
         IntentFilter intentFilter = new IntentFilter("my.own.broadcast");
         LocalBroadcastManager.getInstance(this).registerReceiver(localBroadCastReceiver, intentFilter);
-
-    }
-
-    private void opencontact() {
-        new MultiContactPicker.Builder(WhatsappScheduler.this) //Activity/com.example.eminz.fragment context
-                .hideScrollbar(false) //Optional - default: false
-                .showTrack(true) //Optional - default: true
-                .searchIconColor(Color.WHITE) //Option - default: White
-                .setChoiceMode(MultiContactPicker.CHOICE_MODE_MULTIPLE) //Optional - default: CHOICE_MODE_MULTIPLE
-                .handleColor(ContextCompat.getColor(WhatsappScheduler.this, R.color.purple_500)) //Optional - default: Azure Blue
-                .bubbleColor(ContextCompat.getColor(WhatsappScheduler.this, R.color.purple_700)) //Optional - default: Azure Blue
-                .bubbleTextColor(Color.WHITE) //Optional - default: White
-                .setTitleText("Select Contacts") //Optional - default: Select Contacts
-                .setLoadingType(MultiContactPicker.LOAD_ASYNC) //Optional - default LOAD_ASYNC (wait till all loaded vs stream results)
-                .limitToColumn(LimitColumn.NONE) //Optional - default NONE (Include phone + email, limiting to one can improve loading time)
-                .setActivityAnimations(android.R.anim.fade_in, android.R.anim.fade_out,
-                        android.R.anim.fade_in,
-                        android.R.anim.fade_out) //Optional - default: No animation overrides
-                .showPickerForResult(CONTACT_PICKER_REQUEST);
 
     }
 
@@ -347,26 +270,6 @@ public class WhatsappScheduler extends AppCompatActivity {
 
     }
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CONTACT_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                results = MultiContactPicker.obtainResult(data);
-                StringBuilder names = new StringBuilder(results.get(0).getDisplayName());
-                for (int j = 0; j < results.size(); j++) {
-                    if (j != 0)
-                        names.append(",").append(results.get(j).getDisplayName());
-                }
-                phn.setText(names);
-
-                Log.d("MyTag", results.get(0).getDisplayName());
-            } else if (resultCode == RESULT_CANCELED) {
-                System.out.println("User closed the picker without selecting items.");
-            }
-        }
-    }
 
     private boolean isAccessibilityOn(Context context) {
 
@@ -396,6 +299,96 @@ public class WhatsappScheduler extends AppCompatActivity {
         return false;
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.whatsappmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (hr != 100 && min != 100) {
+            if (day != 31 && mon != 12 && years != 1) {
+                if (!results.isEmpty()) {
+                    if (!sms.getText().toString().isEmpty()) {
+                        List<String> numbersList = new ArrayList<String>();
+                        for (int i = 0; i < results.size(); i++) {
+                            numbersList.add(results.get(i).getPhoneNumbers().get(0).getNumber());
+                        }
+                        String[] numbers = numbersList.toArray(new String[0]);
+                        long flexTime = calculateFlex(hr, min, sec, day, mon, years);
+                        String message = sms.getText().toString();
+                        final String every = everytime.getText().toString();
+                        final String endAfter = endafter.getText().toString();
+                        String drop1 = spin1.getSelectedItem().toString();
+                        String drop2 = spin2.getSelectedItem().toString();
+                        int everyInt = 0, repeatCount = 0;
+                        try {
+                            everyInt = Integer.parseInt(every);
+                            repeatCount = Integer.parseInt(endAfter);
+                        } catch (Exception ignored) {
+
+                        }
+                        long scheduleId = System.currentTimeMillis();
+                        Data messageData = new Data.Builder()
+
+                                .putString("message", message)
+                                .putStringArray("contacts", numbers)
+                                .putString("Everytime", every)
+                                .putString("ending", endAfter)
+                                .putString("dropitem", drop1)
+                                .putString("dropitem2", drop2)
+                                .putLong("schdeuleId", scheduleId)
+                                .build();
+
+                        Schedule schedule = new Schedule(scheduleId, "WhatsApp", TextUtils.join(",", numbers), message, flexTime, flexTime,
+                                everyInt, drop1, repeatCount, repeatCount, "Pending");
+
+
+                        OneTimeWorkRequest sendMessagework = new OneTimeWorkRequest.Builder(Onetimeworker.class)
+                                .setInitialDelay(flexTime, TimeUnit.MILLISECONDS)
+                                .setInputData(messageData)
+                                .build();
+                        WorkManager.getInstance().enqueue(sendMessagework);
+
+
+                        AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+                        ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+
+                        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                List<Long> insert = scheduleDao.insert(schedule);
+                                finish();
+
+
+                            }
+                        });
+
+                        Toast.makeText(WhatsappScheduler.this, "Message is scheduled", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(WhatsappScheduler.this, "Please add message", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    Toast.makeText(WhatsappScheduler.this, "Select Contact Number", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(WhatsappScheduler.this, "Please select Date", Toast.LENGTH_SHORT).show();
+            }
+
+
+        } else {
+            Toast.makeText(WhatsappScheduler.this, "Please select Time", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+        return true;
     }
 
 

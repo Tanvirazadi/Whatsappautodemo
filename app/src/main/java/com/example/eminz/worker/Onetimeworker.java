@@ -15,11 +15,18 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.example.eminz.database.AppDatabase;
+import com.example.eminz.database.AppExecutors;
+import com.example.eminz.database.DatabaseClient;
+import com.example.eminz.database.daos.ScheduleDao;
+import com.example.eminz.database.entities.Schedule;
+
 import java.net.URLEncoder;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class Onetimeworker extends Worker {
+
 
 
     public Onetimeworker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
@@ -37,6 +44,7 @@ public class Onetimeworker extends Worker {
         String[] numbers = getInputData().getStringArray("contacts");
         String dropitem = getInputData().getString("dropitem");
         String dropitem2 = getInputData().getString("dropitem2");
+        long scheduleId = getInputData().getLong("schdeuleId", -1);
 
 
         Log.d("onetimewhatsapp", "periodicscheduler");
@@ -77,17 +85,55 @@ public class Onetimeworker extends Worker {
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                         if (intent.resolveActivity(packageManager) != null) {
-                            Log.d("onetimewhatsapp", "inside resolver");
                             getApplicationContext().startActivity(intent);
                             Thread.sleep(5000);
-                            Log.d("onetimewhatsapp", "inside sleep");
+
+
+                            AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+                            ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+                            AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Schedule sent = scheduleDao.findById(scheduleId);
+                                    sent.status = "Sent";
+                                    scheduleDao.update(sent);
+                                }
+                            });
+
                         } else {
                             Log.d("onetimewhatsapp", "inside resolver else");
+
+//                            Failed
+
+
+                            AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+                            ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+                            AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Schedule Failed = scheduleDao.findById(scheduleId);
+                                    Failed.status = "Failed";
+                                    scheduleDao.update(Failed);
+                                }
+                            });
 
                         }
                     } catch (Exception e) {
                         Log.d("onetimewhatsapp", "Exception " + e.getMessage());
                         e.printStackTrace();
+
+
+                        AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+                        ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
+                        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                Schedule Failed = scheduleDao.findById(scheduleId);
+                                Failed.status = "Failed";
+                                scheduleDao.update(Failed);
+                            }
+                        });
+//                        Failed
                     }
 
                 }
@@ -123,6 +169,7 @@ public class Onetimeworker extends Worker {
             case "Months":
                 result = everytimesint * 60 * 60 * 24 * 1000 * 30;
                 break;
+
 
             default:
                 result = everytimesint * 60 * 60 * 24 * 1000 * 365;

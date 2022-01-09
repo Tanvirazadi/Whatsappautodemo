@@ -84,4 +84,16 @@
 
 
     </string>
+
+
+    <string name="pick_contacts" translatable="false">Pick contact(s)</string>
+    <string name="picked_contacts" translatable="false">Picked contact(s)</string>
+
+    <string name="permission_denied" translatable="false">Permission denied</string>
+    <string name="permission_denied_contacts" translatable="false">The contact picker won\'t work without this permission. Are you sure you want to deny this permission?</string>
+    <string name="permission_deny" translatable="false">Deny</string>
+    <string name="permission_retry" translatable="false">Re-try</string>
+
+    <string name="light_theme" translatable="false">Light Theme</string>
+    <string name="dark_theme" translatable="false">Dark Theme</string>
 </resources>

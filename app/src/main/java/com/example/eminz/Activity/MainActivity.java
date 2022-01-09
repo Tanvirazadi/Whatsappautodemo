@@ -73,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
-        fragmentadapter = new Fragmentadapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, tabLayout.getTabCount());
+        fragmentadapter = new Fragmentadapter(getSupportFragmentManager(), FragmentPagerAdapter.
+                BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, tabLayout.getTabCount());
         viewPager.setAdapter(fragmentadapter);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -110,11 +111,13 @@ public class MainActivity extends AppCompatActivity {
 
             return true;
         });
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SMSScheduler.class);
                 startActivity(intent);
+
 
             }
         });
@@ -125,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, WhatsappScheduler.class);
                 startActivity(intent);
+
+
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
                 if (isInstalled) {
                     Intent intent = new Intent(MainActivity.this, WhatsappbsnsScheduler.class);
                     startActivity(intent);
+
+
                 } else {
                     Snackbar.make(drawerLayout, "You must have Whatsapp Business installed to enjoy this feature!", Snackbar.LENGTH_LONG)
                             .setAction("close", new View.OnClickListener() {
@@ -144,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }).setActionTextColor(getResources().getColor(R.color.purple_500))
                             .show();
+
+
                 }
 
 
@@ -151,6 +160,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewPager.setCurrentItem(0);
     }
 
     private boolean isPackageInstalled(PackageManager packageManager) {

@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.whatsappdemo.R;
 import com.example.eminz.Sqlite.Databsehelper;
 import com.example.eminz.Sqlite.User;
+import com.example.whatsappdemo.R;
 
 
 public class Signuppage extends AppCompatActivity {
@@ -62,6 +62,7 @@ public class Signuppage extends AppCompatActivity {
 
                 if (Nam.length()==0){
                     name.setError("This field is required");
+                    return;
                 }if (mail.isEmpty() || !mail.matches(pattern)){
                     email.setError("Invalid Email Address");
                 }if (username.isEmpty()){

@@ -17,12 +17,15 @@ public class Databsehelper extends SQLiteOpenHelper {
     private static final String USERNAME = "Username";
     private static final String PASSWORD = "Password";
     private static final String CONFIRM = "Confirm";
-    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + NAME + " VARCHAR (25)," + USERNAME + " VARCHAR (55)," + PASSWORD + " VARCHAR (23)," + CONFIRM + " VARCHAR (22)," + EMAIL + " VARCHAR(24));";
+    private static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
+            "(" + NAME + " VARCHAR (25)," + USERNAME + " VARCHAR (55)," + PASSWORD +
+            " VARCHAR (23)," + CONFIRM + " VARCHAR (22)," +
+            "" + EMAIL + " VARCHAR(24));";
 
     private final Context context;
 
     public Databsehelper(@Nullable Context context) {
-        super(context, DATABASE, null, (int) 7.5);
+        super(context, DATABASE, null, 1);
         this.context = context;
     }
 

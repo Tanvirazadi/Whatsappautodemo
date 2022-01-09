@@ -10,4 +10,5 @@ import com.example.eminz.database.entities.Schedule;
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ScheduleDao scheduleDaoDao();
 
+
 }
