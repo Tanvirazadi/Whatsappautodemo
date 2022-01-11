@@ -18,8 +18,9 @@ import com.example.eminz.database.entities.Schedule;
 import com.example.whatsappdemo.R;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 public class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.ViewHolder> {
@@ -45,8 +46,16 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull SmsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.name.setText(this.scheduleList.get(position).recipients);
-        Date date = new Date(scheduleList.get(position).date);
-        holder.date.setText(date.toString());
+        //String output = formatter.format(calendar.getTime());
+        //Date date = new Date(scheduleList.get(position).date);
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(scheduleList.get(position).date);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy- hh:mm a");
+        String dateString = format.format(calendar.getTime());
+        holder.date.setText(dateString);
+
         holder.message.setText(this.scheduleList.get(position).body);
         Time time = new Time(scheduleList.get(position).time);
         holder.time.setText(time.toString());
@@ -54,11 +63,14 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//
+
                 Intent intent = new Intent(context, LastActivity.class);
                 intent.putExtra("message", scheduleList.get(position).body);
-                intent.putExtra("date", scheduleList.get(position).date);
+                intent.putExtra("date", dateString);
                 intent.putExtra("time", scheduleList.get(position).time);
                 intent.putExtra("name", scheduleList.get(position).recipients);
+                intent.putExtra("position", position);
                 context.startActivity(intent);
             }
         });

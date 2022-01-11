@@ -6,21 +6,33 @@
     android:layout_height="match_parent"
     tools:context="com.example.eminz.Scheduler.SMSScheduler">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#0091EA"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:subtitleTextAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        app:title="SMS" />
+
 
     <EditText
         android:id="@+id/phon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint=""
         android:inputType="phone"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
@@ -35,32 +47,18 @@
         app:barrierMargin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/phon"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toStartOf="@+id/phon"
         app:layout_constraintTop_toBottomOf="@+id/phon"
-        app:layout_constraintVertical_bias="0.695"
+        app:layout_constraintVertical_bias="0.192"
         tools:ignore="RtlSymmetry" />
-
-    <ImageButton
-        android:id="@+id/choos"
-        android:layout_width="110dp"
-        android:layout_height="83dp"
-        android:src="@drawable/ic_baseline_group_24"
-        android:text="@string/contacts"
-        app:layout_constraintBottom_toBottomOf="@+id/phon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="@+id/phon"
-        app:layout_constraintTop_toTopOf="@+id/phon"
-        app:layout_constraintVertical_bias="0.228"
-        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="86dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="440dp"
+        android:layout_marginBottom="600dp"
         android:paddingStart="5dp"
         android:text="@string/everys"
         android:textSize="18sp"
@@ -73,21 +71,22 @@
         android:id="@+id/edit11"
         android:layout_width="65dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="432dp"
+        android:layout_marginBottom="588dp"
         android:inputType="number"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintHorizontal_bias="0.144"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         tools:ignore="SpeakableTextPresentCheck" />
+
 
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginBottom="444dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="604dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit11"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -97,7 +96,7 @@
         android:layout_width="86dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="384dp"
+        android:layout_marginBottom="520dp"
         android:paddingStart="5dp"
         android:text="@string/end_after"
         android:textSize="18sp"
@@ -106,25 +105,12 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="RtlSymmetry" />
 
-    <EditText
-        android:id="@+id/edit12"
-        android:layout_width="221dp"
-        android:layout_height="91dp"
-        android:layout_marginBottom="232dp"
-        android:inputType="number"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginBottom="388dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginBottom="520dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/edit11"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />

@@ -2,8 +2,12 @@ package com.example.eminz.fragment;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,11 +33,15 @@ public class Failed extends Fragment {
     RecyclerView recyclerView;
     SmsAdapter smsAdapter;
     MutableLiveData<List<Schedule>> FailedMutableLiveData = new MutableLiveData<>();
+    int position;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_failed, container, false);
+        setHasOptionsMenu(true);
+
+
         recyclerView = view.findViewById(R.id.recyclerfailed);
 
         FailedMutableLiveData.observe(getViewLifecycleOwner(), Failed -> {
@@ -41,6 +49,8 @@ public class Failed extends Fragment {
             recyclerView.setAdapter(smsAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         });
+        appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+        loaddata();
         return view;
 
 
@@ -52,8 +62,8 @@ public class Failed extends Fragment {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                List<Schedule> Failed = scheduleDao.findByStatus("Failed");
-                FailedMutableLiveData.postValue(Failed);
+                List<Schedule> failed = scheduleDao.findByStatus("Failed");
+                FailedMutableLiveData.postValue(failed);
             }
         });
     }
@@ -71,5 +81,27 @@ public class Failed extends Fragment {
     public void onResume() {
         super.onResume();
         loaddata();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
+        MenuInflater inflater1 = getActivity().getMenuInflater();
+        inflater1.inflate(R.menu.menuforfailed, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.clearfailed) {
+            FailedMutableLiveData.observe(this, faileddeletes -> {
+                AsyncTask.execute(() -> {
+                    appDatabase.scheduleDaoDao().delete(faileddeletes.get(position));
+                });
+
+            });
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

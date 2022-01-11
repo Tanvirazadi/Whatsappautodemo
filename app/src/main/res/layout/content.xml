@@ -8,21 +8,25 @@
 
 
     <androidx.appcompat.widget.Toolbar
+        android:background="#0091EA"
+        app:subtitleTextAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:id="@+id/tool"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/teal_200"
+        app:title="Home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"/>
+        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <com.google.android.material.tabs.TabLayout
+
+        android:background="#0091EA"
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/teal_200"
+        app:tabIndicatorColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/viewpag"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -101,6 +105,8 @@
             app:fab_icon="@drawable/whatsapp"
             app:fab_size="normal"
             app:fab_title="Whatsapp"
+            android:contentDescription="WhatsApp"
+            android:contextClickable="true"
             app:layout_constraintBottom_toTopOf="@+id/floatingActionsMenu"
             app:layout_constraintEnd_toEndOf="parent" />
 

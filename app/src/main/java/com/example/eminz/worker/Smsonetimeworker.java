@@ -93,6 +93,8 @@ public class Smsonetimeworker extends Worker {
 
             }
         } catch (Exception e) {
+
+
             AppDatabase appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
             ScheduleDao scheduleDao = appDatabase.scheduleDaoDao();
             AppExecutors.getInstance().diskIO().execute(new Runnable() {
@@ -103,7 +105,6 @@ public class Smsonetimeworker extends Worker {
                     scheduleDao.update(Failed);
                 }
             });
-            e.printStackTrace();
         }
 
         return Result.success();

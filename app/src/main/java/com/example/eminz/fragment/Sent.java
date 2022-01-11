@@ -2,8 +2,12 @@ package com.example.eminz.fragment;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -32,20 +36,27 @@ public class Sent extends Fragment {
     SmsAdapter smsAdapter;
     MutableLiveData<List<Schedule>> sentMutableLiveData = new MutableLiveData<>();
     Schedule schedule;
+    int position;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sent, container, false);
-        recyclerView = view.findViewById(R.id.recyclersent);
+        setHasOptionsMenu(true);
 
+
+        recyclerView = view.findViewById(R.id.recyclersent);
         sentMutableLiveData.observe(getViewLifecycleOwner(), sends -> {
             smsAdapter = new SmsAdapter(getContext(), sends);
             recyclerView.setAdapter(smsAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         });
+        appDatabase = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase();
+        loaddata();
         return view;
+
+
     }
 
     public void loaddata() {
@@ -75,5 +86,27 @@ public class Sent extends Fragment {
     public void onResume() {
         super.onResume();
         loaddata();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
+        MenuInflater inflater1 = getActivity().getMenuInflater();
+        inflater1.inflate(R.menu.menuforsent, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.clearsent) {
+            sentMutableLiveData.observe(this, sentdeletes -> {
+                AsyncTask.execute(() -> {
+                    appDatabase.scheduleDaoDao().delete(sentdeletes.get(position));
+                });
+
+            });
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

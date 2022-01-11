@@ -6,27 +6,37 @@
     android:layout_height="match_parent"
     tools:context="com.example.eminz.Scheduler.SMSScheduler">
 
-
-    <EditText
-        android:id="@+id/phon"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolsms"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint=""
-        android:inputType="phone"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:background="#0091EA"
+        app:title="SMS"
+        app:titleTextColor="@color/white"
+
+
+        />
+
+
+    <com.android.ex.chips.RecipientEditTextView
+        android:id="@+id/phone_retrvssms"
+        android:layout_width="216dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="160dp"
+        android:hint="Contacts"
+        android:minHeight="58dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/smstxt"
         android:layout_width="309dp"
         android:layout_height="93dp"
+        android:layout_marginEnd="52dp"
         android:layout_marginBottom="536dp"
         android:ems="50"
         android:hint="@string/enter_messeage"
@@ -34,26 +44,10 @@
         android:paddingStart="4dp"
         app:barrierMargin="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/phon"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/phon"
-        app:layout_constraintTop_toBottomOf="@+id/phon"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="RtlSymmetry" />
-
-    <ImageButton
-        android:id="@+id/choos"
-        android:layout_width="110dp"
-        android:layout_height="83dp"
-        android:src="@drawable/ic_baseline_group_24"
-        android:text="@string/contacts"
-        app:layout_constraintBottom_toBottomOf="@+id/phon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="@+id/phon"
-        app:layout_constraintTop_toTopOf="@+id/phon"
-        app:layout_constraintVertical_bias="0.228"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_retrvssms"
+        app:layout_constraintVertical_bias="0.459"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/textView7"
@@ -175,6 +169,17 @@
         app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit12" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/phone_retrvssms"
+        app:srcCompat="@drawable/ic_message"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

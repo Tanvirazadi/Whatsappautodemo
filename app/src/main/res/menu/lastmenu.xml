@@ -6,15 +6,16 @@
         android:id="@+id/delete"
         android:icon="@drawable/ic_baseline_delete_24"
         android:title="Delete"
-        app:showAsAction="always"></item>
+        app:showAsAction="always">
+
+    </item>
     <item
         android:id="@+id/edit"
         android:icon="@drawable/ic_baseline_edit_24"
         android:title="Edit"
-        app:showAsAction="always"></item>
-    <item
-        android:id="@+id/clearall"
-        android:title="Clear all"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="always">
+
+    </item>
+
 
 </menu>

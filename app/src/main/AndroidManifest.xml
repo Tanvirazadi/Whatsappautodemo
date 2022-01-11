@@ -19,9 +19,11 @@
         android:theme="@style/Theme.Whatsappdemo"
         tools:replace="allowBackup">
         <activity
+            android:name="com.example.eminz.Activity.Notify"
+            android:exported="false" />
+        <activity
             android:name="com.example.eminz.Activity.LastActivity"
-            android:exported="false"
-            android:theme="@style/mystyle" />
+            android:exported="false" />
         <activity
             android:name="com.example.eminz.Scheduler.WhatsappbsnsScheduler"
             android:exported="true"
@@ -35,8 +37,7 @@
         <activity
             android:name="com.example.eminz.Scheduler.SMSScheduler"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/mystyle" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.onegravity.contactpicker.core.ContactPickerActivity"
             android:enabled="true"

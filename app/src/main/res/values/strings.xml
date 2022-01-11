@@ -96,4 +96,5 @@
 
     <string name="light_theme" translatable="false">Light Theme</string>
     <string name="dark_theme" translatable="false">Dark Theme</string>
+    <string name="clear_penidings">Clear Penidings</string>
 </resources>

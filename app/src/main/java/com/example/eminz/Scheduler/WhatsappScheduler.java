@@ -1,6 +1,8 @@
 package com.example.eminz.Scheduler;
 
 import android.Manifest;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,10 +19,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,13 +33,16 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.android.ex.chips.BaseRecipientAdapter;
 import com.android.ex.chips.RecipientEditTextView;
 import com.android.ex.chips.recipientchip.DrawableRecipientChip;
+import com.example.eminz.Activity.Notify;
 import com.example.eminz.Service.Whatsappaccessibility;
 import com.example.eminz.database.AppDatabase;
 import com.example.eminz.database.AppExecutors;
@@ -49,13 +56,13 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-import com.wafflecopter.multicontactpicker.ContactResult;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -71,7 +78,7 @@ public class WhatsappScheduler extends AppCompatActivity {
     String drop_item;
     EditText sms, everytime, endafter;
     Spinner spin1, spin2;
-    ArrayList<ContactResult> results = new ArrayList<>();
+    ArrayList<DrawableRecipientChip> results = new ArrayList<>();
     TextView time, date;
     int day = 30;
     int mon = 12;
@@ -79,6 +86,8 @@ public class WhatsappScheduler extends AppCompatActivity {
     private int hr = 100;
     private int min = 100;
     private int sec = 100;
+    Switch aSwitch;
+    private RecipientEditTextView phoneRetv;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -87,7 +96,7 @@ public class WhatsappScheduler extends AppCompatActivity {
         setContentView(R.layout.activity_whatsapp_scheduler);
 
 
-        final RecipientEditTextView phoneRetv = (RecipientEditTextView) findViewById(R.id.phone_retrvs);
+        phoneRetv = (RecipientEditTextView) findViewById(R.id.phone_retrvs);
         phoneRetv.setMaxChips(4);
         phoneRetv.setChipNotCreatedListener(new RecipientEditTextView.ChipNotCreatedListener() {
             @Override
@@ -147,6 +156,7 @@ public class WhatsappScheduler extends AppCompatActivity {
         date = findViewById(R.id.whatsappdate);
         spin1 = findViewById(R.id.spinner21);
         spin2 = findViewById(R.id.spinner22);
+        aSwitch = findViewById(R.id.switch1);
 
 
         everytime = findViewById(R.id.edit11);
@@ -166,6 +176,40 @@ public class WhatsappScheduler extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin2.setAdapter(adapter2);
         drop_item2 = spin2.getSelectedItem().toString();
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b == true) {
+                    NotificationManager manager =
+                            (NotificationManager) getApplicationContext().
+                                    getSystemService(
+                                            Context.NOTIFICATION_SERVICE
+                                    );
+
+                    Intent send = new Intent(WhatsappScheduler.this, Notify.class);
+                    send.putExtra("Send", true);
+                    send.putExtra("msg", results);
+                    send.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    PendingIntent sentPI = PendingIntent.getActivity(
+                            WhatsappScheduler.this, 0, send, PendingIntent
+                                    .FLAG_ONE_SHOT
+                    );
+                    Intent cancel = new Intent(WhatsappScheduler.this, Notify.class);
+                    send.putExtra("Cancel", true);
+                    send.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    PendingIntent cancelPi = PendingIntent.getActivity(
+                            WhatsappScheduler.this, 0, send, PendingIntent
+                                    .FLAG_ONE_SHOT
+                    );
+
+
+                }
+            }
+        });
 
 
         Dexter.withContext(this)
@@ -218,7 +262,12 @@ public class WhatsappScheduler extends AppCompatActivity {
                                 years = yea;
                                 mon = monthOfYear;
                                 day = dayOfMonth;
-                                date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + yea);
+
+                                calendar.set(Calendar.YEAR, yea);
+                                calendar.set(Calendar.MONTH, monthOfYear);
+                                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                                /*date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + yea);*/
                                 SimpleDateFormat format = new SimpleDateFormat("dd-MMM-yyyy");
                                 String dateString = format.format(calendar.getTime());
                                 date.setText(dateString);
@@ -312,14 +361,34 @@ public class WhatsappScheduler extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (hr != 100 && min != 100) {
             if (day != 31 && mon != 12 && years != 1) {
+                DrawableRecipientChip[] chips = phoneRetv.getSortedRecipients();
+                for (DrawableRecipientChip chip : chips) {
+                    Log.v("DrawableChip", chip.getEntry().getDisplayName() + " " + chip.getEntry().getDestination());
+                }
+
+                results.addAll(Arrays.asList(chips));
+
                 if (!results.isEmpty()) {
                     if (!sms.getText().toString().isEmpty()) {
                         List<String> numbersList = new ArrayList<String>();
                         for (int i = 0; i < results.size(); i++) {
-                            numbersList.add(results.get(i).getPhoneNumbers().get(0).getNumber());
+                            numbersList.add(results.get(i).getEntry().getDisplayName() + results.get(i).getEntry().getDestination());
                         }
                         String[] numbers = numbersList.toArray(new String[0]);
                         long flexTime = calculateFlex(hr, min, sec, day, mon, years);
+
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.HOUR_OF_DAY, hr);
+                        cal.set(Calendar.MINUTE, min);
+                        cal.set(Calendar.SECOND, sec);
+                        cal.set(Calendar.DAY_OF_MONTH, day);
+                        cal.set(Calendar.MONTH, mon);
+                        cal.set(Calendar.YEAR, years);
+
+
+                        long dateInMillies = cal.getTimeInMillis();
+
+
                         String message = sms.getText().toString();
                         final String every = everytime.getText().toString();
                         final String endAfter = endafter.getText().toString();
@@ -344,13 +413,15 @@ public class WhatsappScheduler extends AppCompatActivity {
                                 .putLong("schdeuleId", scheduleId)
                                 .build();
 
-                        Schedule schedule = new Schedule(scheduleId, "WhatsApp", TextUtils.join(",", numbers), message, flexTime, flexTime,
+                        Schedule schedule = new Schedule(scheduleId, "WhatsApp", TextUtils.join(",", numbers), message, dateInMillies, dateInMillies,
                                 everyInt, drop1, repeatCount, repeatCount, "Pending");
+                        Constraints constraints = new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build();
 
 
                         OneTimeWorkRequest sendMessagework = new OneTimeWorkRequest.Builder(Onetimeworker.class)
-                                .setInitialDelay(flexTime, TimeUnit.MILLISECONDS)
+                                .setInitialDelay(dateInMillies, TimeUnit.MILLISECONDS)
                                 .setInputData(messageData)
+                                .setConstraints(constraints)
                                 .build();
                         WorkManager.getInstance().enqueue(sendMessagework);
 

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -160,18 +161,30 @@
         app:layout_constraintStart_toEndOf="@+id/whatsappdate"
         app:layout_constraintTop_toBottomOf="@+id/txt" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/secondview"
-        android:layout_width="390dp"
-        android:layout_height="307dp"
-        android:background="#CDC2C2"
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="324dp"
+        android:minHeight="48dp"
+        android:text="Switch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/whatsappdate">
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="68dp"
+        app:layout_constraintEnd_toStartOf="@+id/switch1"
+        app:layout_constraintTop_toBottomOf="@+id/edit12">
+
+        <include layout="@layout/extra" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

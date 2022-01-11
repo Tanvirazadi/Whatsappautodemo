@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?><!--<androidx.constraintlayout.widget.ConstraintLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="383dp"
+    android:layout_height="659dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="24dp"
+    android:background="#E3DFDF"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.505">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="132dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="24dp"
+        android:text="Time selection"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="325dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="4dp"
+        android:text="Do Not schedule two or more WhatsApp messages at the same time,or close ro one another.Apply a reasonable scheduling space in-between your messages to avoid sending issues."
+        android:textColor="#383232"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/learntext1"
+        android:layout_width="102dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="88dp"
+        android:text="LEARN MORE"
+        android:textColor="#037FCC"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="112dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="44dp"
+        android:text="Screen Lock"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="325dp"
+        android:layout_height="87dp"
+        android:layout_marginTop="20dp"
+        android:paddingStart="4dp"
+        android:text="Please set your lock to 'swipe' or 'none' so Rminz can start the auto sending on your behalf when &quot;Ask me before sending&quot; is OFF(or turn it ON to keep the screen lock)"
+        android:textColor="#383232"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/screentext"
+        android:layout_width="173dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="12dp"
+        android:text="CHANGE SCREEN LOCK"
+        android:textColor="#037FCC"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/learntext2"
+        android:layout_width="91dp"
+        android:layout_height="25dp"
+        android:text="LEARN MORE"
+        android:textColor="#037FCC"
+        app:layout_constraintEnd_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/screentext" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="174dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="24dp"
+        android:text="BATTERY OPTIMIZATION"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/screentext" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="324dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="12dp"
+        android:paddingStart="4dp"
+        android:text="To prevent issues with the accessibility service,please remove any battery optimization for Rminz-it should be listed under 'Apps not optimized'.if available,enable 'autostart' on Rminz's &quot;App details&quot; eindow"
+        android:textColor="#383232"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/battery"
+        android:layout_width="235dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="32dp"
+        android:text="CHANGE BATTERY OPTIMIZATION"
+        android:textColor="#037FCC"
+        app:layout_constraintStart_toStartOf="@+id/screentext"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/learntext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LEARN MORE"
+        android:textColor="#037FCC"
+        app:layout_constraintEnd_toEndOf="@+id/learntext2"
+        app:layout_constraintTop_toTopOf="@+id/battery" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="313dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="28dp"
+        android:paddingStart="4dp"
+        android:text="Rminz does not use WhatsApp's  API or any third-party API service. Instead,it runs automation using your device."
+        android:textColor="#383232"
+        app:layout_constraintStart_toStartOf="@+id/textView16"
+        app:layout_constraintTop_toBottomOf="@+id/battery" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->

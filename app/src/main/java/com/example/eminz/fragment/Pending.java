@@ -2,8 +2,12 @@ package com.example.eminz.fragment;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -30,19 +34,19 @@ public class Pending extends Fragment {
     RecyclerView recyclerView;
     SmsAdapter smsAdapter;
     MutableLiveData<List<Schedule>> pendingMutableLiveData = new MutableLiveData<>();
+    int position;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pending, parent, false);
+        setHasOptionsMenu(true);
 
 
         recyclerView = view.findViewById(R.id.recycler);
-
         pendingMutableLiveData.observe(getViewLifecycleOwner(), pendings -> {
             smsAdapter = new SmsAdapter(getContext(), pendings);
             recyclerView.setAdapter(smsAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         });
 
@@ -79,4 +83,27 @@ public class Pending extends Fragment {
         super.onResume();
         loaddata();
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
+        MenuInflater inflater1 = getActivity().getMenuInflater();
+        inflater1.inflate(R.menu.menuforpending, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.clearpending) {
+            pendingMutableLiveData.observe(this, pendingdeletes -> {
+                AsyncTask.execute(() -> {
+                    appDatabase.scheduleDaoDao().delete(pendingdeletes.get(position));
+                });
+
+            });
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

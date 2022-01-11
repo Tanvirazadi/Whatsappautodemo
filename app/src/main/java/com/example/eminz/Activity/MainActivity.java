@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
+
         });
         button2.setOnClickListener(new View.OnClickListener() {
 
@@ -206,7 +207,9 @@ public class MainActivity extends AppCompatActivity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                  
+                    TextView txt = findViewById(R.id.accountid);
+                    txt.setText("Tanvir Azadi");
+
                 }
             });
 
